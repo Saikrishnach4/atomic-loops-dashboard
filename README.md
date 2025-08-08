@@ -30,7 +30,7 @@ Before running this project, make sure you have:
 
 ### 1. Clone the Repository
 ```bash
-git clone <[repository-url](https://github.com/Saikrishnach4/atomic-loops-dashboard.git)>
+git clone <(https://github.com/Saikrishnach4/atomic-loops-dashboard.git)>
 cd al-dashboard
 ```
 
