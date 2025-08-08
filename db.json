@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "cdd9",
+      "name": "saikrishna ch",
+      "email": "saikrishnachippa4@gmail.com",
+      "gender": "Male",
+      "category": "Student"
+    }
+  ],
+  "products": [
+    {
+      "id": "1124",
+      "name": "phone",
+      "price": 100,
+      "description": "nice phone",
+      "category": "Electronics"
+    }
+  ]
+}
