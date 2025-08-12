@@ -1,20 +1,1127 @@
 {
   "users": [
     {
-      "id": "cdd9",
-      "name": "saikrishna ch",
+      "id": "u1",
+      "name": "Alice Johnson",
+      "email": "alice@example.com",
+      "gender": "Female",
+      "category": "Employee"
+    },
+    {
+      "id": "u2",
+      "name": "Bob Smith",
+      "email": "bob@example.com",
+      "gender": "Male",
+      "category": "Student"
+    },
+    {
+      "id": "u3",
+      "name": "Charlie Brown",
+      "email": "charlie@example.com",
+      "gender": "Male",
+      "category": "Employee"
+    },
+    {
+      "id": "u4",
+      "name": "Diana Patel",
+      "email": "diana@example.com",
+      "gender": "Female",
+      "category": "Employee"
+    },
+    {
+      "id": "u5",
+      "name": "Ethan Lee",
+      "email": "ethan@example.com",
+      "gender": "Male",
+      "category": "Other"
+    },
+    {
+      "id": "u6",
+      "name": "Fiona White",
+      "email": "fiona@example.com",
+      "gender": "Female",
+      "category": "Student"
+    },
+    {
+      "id": "u7",
+      "name": "George Hall",
+      "email": "george@example.com",
+      "gender": "Male",
+      "category": "Employee"
+    },
+    {
+      "id": "u8",
+      "name": "Hannah Green",
+      "email": "hannah@example.com",
+      "gender": "Female",
+      "category": "Student"
+    },
+    {
+      "id": "u9",
+      "name": "Ian Clark",
+      "email": "ian@example.com",
+      "gender": "Male",
+      "category": "Employee"
+    },
+    {
+      "id": "u10",
+      "name": "Julia Roberts",
+      "email": "julia@example.com",
+      "gender": "Female",
+      "category": "Employee"
+    },
+    {
+      "id": "u11",
+      "name": "Kevin Brooks",
+      "email": "kevin@example.com",
+      "gender": "Male",
+      "category": "Student"
+    },
+    {
+      "id": "e19b",
+      "name": "Saikrishna Ch",
       "email": "saikrishnachippa4@gmail.com",
       "gender": "Male",
       "category": "Student"
+    },
+    {
+      "id": "u12",
+      "name": "Laura Martinez",
+      "email": "laura.martinez@example.com",
+      "gender": "Female",
+      "category": "Employee"
+    },
+    {
+      "id": "u13",
+      "name": "Michael Chen",
+      "email": "michael.chen@example.com",
+      "gender": "Male",
+      "category": "Other"
+    },
+    {
+      "id": "u14",
+      "name": "Nina Rodriguez",
+      "email": "nina.rodriguez@example.com",
+      "gender": "Female",
+      "category": "Student"
+    },
+    {
+      "id": "u15",
+      "name": "Oliver Thompson",
+      "email": "oliver.thompson@example.com",
+      "gender": "Male",
+      "category": "Employee"
+    },
+    {
+      "id": "u16",
+      "name": "Priya Sharma",
+      "email": "priya.sharma@example.com",
+      "gender": "Female",
+      "category": "Other"
+    },
+    {
+      "id": "u17",
+      "name": "Quentin Davis",
+      "email": "quentin.davis@example.com",
+      "gender": "Male",
+      "category": "Student"
+    },
+    {
+      "id": "u18",
+      "name": "Rachel Kim",
+      "email": "rachel.kim@example.com",
+      "gender": "Female",
+      "category": "Employee"
+    },
+    {
+      "id": "u19",
+      "name": "Samuel Wilson",
+      "email": "samuel.wilson@example.com",
+      "gender": "Male",
+      "category": "Other"
+    },
+    {
+      "id": "u20",
+      "name": "Tessa Anderson",
+      "email": "tessa.anderson@example.com",
+      "gender": "Female",
+      "category": "Student"
+    },
+    {
+      "id": "u21",
+      "name": "Umar Hassan",
+      "email": "umar.hassan@example.com",
+      "gender": "Male",
+      "category": "Employee"
+    },
+    {
+      "id": "u22",
+      "name": "Victoria Miller",
+      "email": "victoria.miller@example.com",
+      "gender": "Female",
+      "category": "Other"
+    },
+    {
+      "id": "u23",
+      "name": "William Garcia",
+      "email": "william.garcia@example.com",
+      "gender": "Male",
+      "category": "Student"
+    },
+    {
+      "id": "u24",
+      "name": "Xiomara Lopez",
+      "email": "xiomara.lopez@example.com",
+      "gender": "Female",
+      "category": "Employee"
+    },
+    {
+      "id": "u25",
+      "name": "Yuki Tanaka",
+      "email": "yuki.tanaka@example.com",
+      "gender": "Female",
+      "category": "Student"
+    },
+    {
+      "id": "u26",
+      "name": "Zach Robinson",
+      "email": "zach.robinson@example.com",
+      "gender": "Male",
+      "category": "Other"
+    },
+    {
+      "id": "u27",
+      "name": "Aria Singh",
+      "email": "aria.singh@example.com",
+      "gender": "Female",
+      "category": "Employee"
+    },
+    {
+      "id": "u28",
+      "name": "Benjamin Torres",
+      "email": "benjamin.torres@example.com",
+      "gender": "Male",
+      "category": "Student"
+    },
+    {
+      "id": "u29",
+      "name": "Catherine Moore",
+      "email": "catherine.moore@example.com",
+      "gender": "Female",
+      "category": "Other"
+    },
+    {
+      "id": "u30",
+      "name": "Daniel Wright",
+      "email": "daniel.wright@example.com",
+      "gender": "Male",
+      "category": "Employee"
+    },
+    {
+      "id": "u31",
+      "name": "Elena Popov",
+      "email": "elena.popov@example.com",
+      "gender": "Female",
+      "category": "Student"
+    },
+    {
+      "id": "u32",
+      "name": "Felix Kumar",
+      "email": "felix.kumar@example.com",
+      "gender": "Male",
+      "category": "Other"
+    },
+    {
+      "id": "u33",
+      "name": "Grace O'Connor",
+      "email": "grace.oconnor@example.com",
+      "gender": "Female",
+      "category": "Employee"
+    },
+    {
+      "id": "u34",
+      "name": "Hassan Al-Rahman",
+      "email": "hassan.alrahman@example.com",
+      "gender": "Male",
+      "category": "Student"
+    },
+    {
+      "id": "u35",
+      "name": "Isabella Costa",
+      "email": "isabella.costa@example.com",
+      "gender": "Female",
+      "category": "Other"
+    },
+    {
+      "id": "u36",
+      "name": "James Peterson",
+      "email": "james.peterson@example.com",
+      "gender": "Male",
+      "category": "Employee"
+    },
+    {
+      "id": "u37",
+      "name": "Kara Johnson",
+      "email": "kara.johnson@example.com",
+      "gender": "Female",
+      "category": "Student"
+    },
+    {
+      "id": "u38",
+      "name": "Liam O'Brien",
+      "email": "liam.obrien@example.com",
+      "gender": "Male",
+      "category": "Other"
+    },
+    {
+      "id": "u39",
+      "name": "Maya Gupta",
+      "email": "maya.gupta@example.com",
+      "gender": "Female",
+      "category": "Employee"
+    },
+    {
+      "id": "u40",
+      "name": "Nathan Foster",
+      "email": "nathan.foster@example.com",
+      "gender": "Male",
+      "category": "Student"
+    },
+    {
+      "id": "u41",
+      "name": "Olivia Zhang",
+      "email": "olivia.zhang@example.com",
+      "gender": "Female",
+      "category": "Other"
+    },
+    {
+      "id": "u42",
+      "name": "Pablo Mendez",
+      "email": "pablo.mendez@example.com",
+      "gender": "Male",
+      "category": "Employee"
+    },
+    {
+      "id": "u43",
+      "name": "Quinn Parker",
+      "email": "quinn.parker@example.com",
+      "gender": "Other",
+      "category": "Student"
+    },
+    {
+      "id": "u44",
+      "name": "Rosa Fernandez",
+      "email": "rosa.fernandez@example.com",
+      "gender": "Female",
+      "category": "Other"
+    },
+    {
+      "id": "u45",
+      "name": "Sebastian Mueller",
+      "email": "sebastian.mueller@example.com",
+      "gender": "Male",
+      "category": "Employee"
+    },
+    {
+      "id": "u46",
+      "name": "Tanya Volkov",
+      "email": "tanya.volkov@example.com",
+      "gender": "Female",
+      "category": "Student"
+    },
+    {
+      "id": "u47",
+      "name": "Ulrich Schmidt",
+      "email": "ulrich.schmidt@example.com",
+      "gender": "Male",
+      "category": "Other"
+    },
+    {
+      "id": "u48",
+      "name": "Valentina Rossi",
+      "email": "valentina.rossi@example.com",
+      "gender": "Female",
+      "category": "Employee"
+    },
+    {
+      "id": "u49",
+      "name": "Wei Lin",
+      "email": "wei.lin@example.com",
+      "gender": "Male",
+      "category": "Student"
+    },
+    {
+      "id": "u50",
+      "name": "Ximena Vargas",
+      "email": "ximena.vargas@example.com",
+      "gender": "Female",
+      "category": "Other"
     }
   ],
   "products": [
     {
-      "id": "1124",
+      "id": "p1",
+      "name": "Smartphone",
+      "price": 700,
+      "description": "Latest model smartphone",
+      "category": "Electronics",
+      "quantity": 45,
+      "sales": [
+        {
+          "userId": "u1",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u1-2025-08-11-1754907653013"
+        },
+        {
+          "userId": "u3",
+          "quantity": 2,
+          "date": "2025-08-10",
+          "id": "u3-2025-08-10-1754907653014"
+        },
+        {
+          "userId": "e19b",
+          "quantity": 5,
+          "date": "2025-08-11",
+          "id": "e19b-2025-08-11-1754910783738"
+        },
+        {
+          "userId": "u3",
+          "quantity": 8,
+          "date": "2025-08-11",
+          "id": "u3-2025-08-11-1754910863017"
+        },
+        {
+          "userId": "u2",
+          "quantity": 2,
+          "date": "2025-08-12",
+          "id": "u2-2025-08-12-1754913114206"
+        },
+        {
+          "userId": "u15",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u15-2025-08-12-1754920001001"
+        },
+        {
+          "userId": "u27",
+          "quantity": 3,
+          "date": "2025-08-11",
+          "id": "u27-2025-08-11-1754920001002"
+        },
+        {
+          "userId": "u33",
+          "quantity": 1,
+          "date": "2025-08-10",
+          "id": "u33-2025-08-10-1754920001003"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "name": "T-Shirt",
+      "price": 19.99,
+      "description": "Comfortable cotton t-shirt",
+      "category": "Clothing",
+      "quantity": 85,
+      "sales": [
+        {
+          "userId": "u2",
+          "quantity": 2,
+          "date": "2025-08-11",
+          "id": "u2-2025-08-11-1754907693974"
+        },
+        {
+          "userId": "u5",
+          "quantity": 3,
+          "date": "2025-08-09",
+          "id": "u5-2025-08-09-1754907693975"
+        },
+        {
+          "userId": "u14",
+          "quantity": 5,
+          "date": "2025-08-12",
+          "id": "u14-2025-08-12-1754920001004"
+        },
+        {
+          "userId": "u20",
+          "quantity": 2,
+          "date": "2025-08-11",
+          "id": "u20-2025-08-11-1754920001005"
+        },
+        {
+          "userId": "u28",
+          "quantity": 4,
+          "date": "2025-08-10",
+          "id": "u28-2025-08-10-1754920001006"
+        }
+      ]
+    },
+    {
+      "id": "e14e",
+      "name": "Laptop",
+      "price": 1200,
+      "description": "Laptop with best features",
+      "category": "Electronics",
+      "quantity": 22,
+      "sales": [
+        {
+          "userId": "u4",
+          "quantity": 2,
+          "date": "2025-08-11",
+          "id": "u4-2025-08-11-1754908104335"
+        },
+        {
+          "userId": "u1",
+          "quantity": 2,
+          "date": "2025-08-10",
+          "id": "u1-2025-08-10-1754908212222"
+        },
+        {
+          "userId": "u18",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u18-2025-08-12-1754920001007"
+        },
+        {
+          "userId": "u30",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u30-2025-08-11-1754920001008"
+        },
+        {
+          "userId": "u39",
+          "quantity": 2,
+          "date": "2025-08-09",
+          "id": "u39-2025-08-09-1754920001009"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "name": "Headphones",
+      "price": 99.99,
+      "description": "Noise-cancelling over-ear headphones",
+      "category": "Electronics",
+      "quantity": 55,
+      "sales": [
+        {
+          "userId": "u6",
+          "quantity": 1,
+          "date": "2025-08-08",
+          "id": "u6-2025-08-08-1754907693976"
+        },
+        {
+          "userId": "u13",
+          "quantity": 2,
+          "date": "2025-08-12",
+          "id": "u13-2025-08-12-1754920001010"
+        },
+        {
+          "userId": "u22",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u22-2025-08-11-1754920001011"
+        },
+        {
+          "userId": "u35",
+          "quantity": 3,
+          "date": "2025-08-10",
+          "id": "u35-2025-08-10-1754920001012"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "name": "Gaming Mouse",
+      "price": 49.99,
+      "description": "RGB wireless gaming mouse",
+      "category": "Electronics",
+      "quantity": 65,
+      "sales": [
+        {
+          "userId": "u7",
+          "quantity": 1,
+          "date": "2025-08-07",
+          "id": "u7-2025-08-07-1754907693977"
+        },
+        {
+          "userId": "u17",
+          "quantity": 2,
+          "date": "2025-08-12",
+          "id": "u17-2025-08-12-1754920001013"
+        },
+        {
+          "userId": "u25",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u25-2025-08-11-1754920001014"
+        },
+        {
+          "userId": "u40",
+          "quantity": 3,
+          "date": "2025-08-09",
+          "id": "u40-2025-08-09-1754920001015"
+        }
+      ]
+    },
+    {
+      "id": "p6",
+      "name": "Backpack",
+      "price": 35,
+      "description": "Waterproof travel backpack",
+      "category": "Accessories",
+      "quantity": 90,
+      "sales": [
+        {
+          "userId": "u8",
+          "quantity": 2,
+          "date": "2025-08-06",
+          "id": "u8-2025-08-06-1754907693978"
+        },
+        {
+          "userId": "u16",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u16-2025-08-12-1754920001016"
+        },
+        {
+          "userId": "u29",
+          "quantity": 4,
+          "date": "2025-08-11",
+          "id": "u29-2025-08-11-1754920001017"
+        },
+        {
+          "userId": "u43",
+          "quantity": 2,
+          "date": "2025-08-10",
+          "id": "u43-2025-08-10-1754920001018"
+        }
+      ]
+    },
+    {
+      "id": "p7",
+      "name": "Coffee Maker",
+      "price": 150,
+      "description": "Automatic drip coffee machine",
+      "category": "Home Appliances",
+      "quantity": 35,
+      "sales": [
+        {
+          "userId": "u9",
+          "quantity": 1,
+          "date": "2025-08-05",
+          "id": "u9-2025-08-05-1754907693979"
+        },
+        {
+          "userId": "u21",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u21-2025-08-12-1754920001019"
+        },
+        {
+          "userId": "u36",
+          "quantity": 2,
+          "date": "2025-08-09",
+          "id": "u36-2025-08-09-1754920001020"
+        }
+      ]
+    },
+    {
+      "id": "p8",
+      "name": "Office Chair",
+      "price": 250,
+      "description": "Ergonomic office chair",
+      "category": "Furniture",
+      "quantity": 18,
+      "sales": [
+        {
+          "userId": "u10",
+          "quantity": 1,
+          "date": "2025-08-04",
+          "id": "u10-2025-08-04-1754907693980"
+        },
+        {
+          "userId": "u24",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u24-2025-08-11-1754920001021"
+        },
+        {
+          "userId": "u42",
+          "quantity": 2,
+          "date": "2025-08-08",
+          "id": "u42-2025-08-08-1754920001022"
+        }
+      ]
+    },
+    {
+      "id": "p9",
+      "name": "Running Shoes",
+      "price": 89.99,
+      "description": "Lightweight running shoes",
+      "category": "Footwear",
+      "quantity": 50,
+      "sales": [
+        {
+          "userId": "u11",
+          "quantity": 1,
+          "date": "2025-08-03",
+          "id": "u11-2025-08-03-1754907693981"
+        },
+        {
+          "userId": "u19",
+          "quantity": 2,
+          "date": "2025-08-12",
+          "id": "u19-2025-08-12-1754920001023"
+        },
+        {
+          "userId": "u31",
+          "quantity": 1,
+          "date": "2025-08-10",
+          "id": "u31-2025-08-10-1754920001024"
+        },
+        {
+          "userId": "u46",
+          "quantity": 3,
+          "date": "2025-08-09",
+          "id": "u46-2025-08-09-1754920001025"
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "name": "Smartwatch",
+      "price": 199.99,
+      "description": "Fitness tracking smartwatch",
+      "category": "Electronics",
+      "quantity": 32,
+      "sales": [
+        {
+          "userId": "e19b",
+          "quantity": 1,
+          "date": "2025-08-02",
+          "id": "e19b-2025-08-02-1754907693982"
+        },
+        {
+          "userId": "u12",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u12-2025-08-11-1754920001026"
+        },
+        {
+          "userId": "u26",
+          "quantity": 2,
+          "date": "2025-08-10",
+          "id": "u26-2025-08-10-1754920001027"
+        },
+        {
+          "userId": "u41",
+          "quantity": 1,
+          "date": "2025-08-08",
+          "id": "u41-2025-08-08-1754920001028"
+        }
+      ]
+    },
+    {
+      "id": "p11",
+      "name": "Wireless Keyboard",
+      "price": 79.99,
+      "description": "Mechanical wireless keyboard with RGB lighting",
+      "category": "Electronics",
+      "quantity": 40,
+      "sales": [
+        {
+          "userId": "u32",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u32-2025-08-12-1754920001029"
+        },
+        {
+          "userId": "u44",
+          "quantity": 2,
+          "date": "2025-08-11",
+          "id": "u44-2025-08-11-1754920001030"
+        },
+        {
+          "userId": "u49",
+          "quantity": 1,
+          "date": "2025-08-09",
+          "id": "u49-2025-08-09-1754920001031"
+        }
+      ]
+    },
+    {
+      "id": "p12",
+      "name": "Yoga Mat",
+      "price": 29.99,
+      "description": "Non-slip exercise yoga mat",
+      "category": "Sports",
+      "quantity": 75,
+      "sales": [
+        {
+          "userId": "u37",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u37-2025-08-12-1754920001032"
+        },
+        {
+          "userId": "u45",
+          "quantity": 2,
+          "date": "2025-08-10",
+          "id": "u45-2025-08-10-1754920001033"
+        },
+        {
+          "userId": "u50",
+          "quantity": 3,
+          "date": "2025-08-11",
+          "id": "u50-2025-08-11-1754920001034"
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "name": "Desk Lamp",
+      "price": 45,
+      "description": "LED desk lamp with adjustable brightness",
+      "category": "Home & Office",
+      "quantity": 60,
+      "sales": [
+        {
+          "userId": "u34",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u34-2025-08-11-1754920001035"
+        },
+        {
+          "userId": "u47",
+          "quantity": 2,
+          "date": "2025-08-09",
+          "id": "u47-2025-08-09-1754920001036"
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "name": "Water Bottle",
+      "price": 24.99,
+      "description": "Insulated stainless steel water bottle",
+      "category": "Accessories",
+      "quantity": 100,
+      "sales": [
+        {
+          "userId": "u38",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u38-2025-08-12-1754920001037"
+        },
+        {
+          "userId": "u48",
+          "quantity": 4,
+          "date": "2025-08-11",
+          "id": "u48-2025-08-11-1754920001038"
+        },
+        {
+          "userId": "u23",
+          "quantity": 2,
+          "date": "2025-08-10",
+          "id": "u23-2025-08-10-1754920001039"
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "name": "Bluetooth Speaker",
+      "price": 129.99,
+      "description": "Portable wireless Bluetooth speaker",
+      "category": "Electronics",
+      "quantity": 45,
+      "sales": [
+        {
+          "userId": "u35",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u35-2025-08-12-1754920001040"
+        },
+        {
+          "userId": "u41",
+          "quantity": 2,
+          "date": "2025-08-11",
+          "id": "u41-2025-08-11-1754920001041"
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "name": "Jeans",
+      "price": 59.99,
+      "description": "Classic fit denim jeans",
+      "category": "Clothing",
+      "quantity": 80,
+      "sales": [
+        {
+          "userId": "u22",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u22-2025-08-12-1754920001042"
+        },
+        {
+          "userId": "u26",
+          "quantity": 3,
+          "date": "2025-08-11",
+          "id": "u26-2025-08-11-1754920001043"
+        },
+        {
+          "userId": "u29",
+          "quantity": 2,
+          "date": "2025-08-09",
+          "id": "u29-2025-08-09-1754920001044"
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "name": "Tablet",
+      "price": 399.99,
+      "description": "10-inch Android tablet",
+      "category": "Electronics",
+      "quantity": 25,
+      "sales": [
+        {
+          "userId": "u31",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u31-2025-08-12-1754920001045"
+        },
+        {
+          "userId": "u43",
+          "quantity": 1,
+          "date": "2025-08-10",
+          "id": "u43-2025-08-10-1754920001046"
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "name": "Hoodie",
+      "price": 49.99,
+      "description": "Comfortable cotton blend hoodie",
+      "category": "Clothing",
+      "quantity": 70,
+      "sales": [
+        {
+          "userId": "u15",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u15-2025-08-11-1754920001047"
+        },
+        {
+          "userId": "u27",
+          "quantity": 2,
+          "date": "2025-08-10",
+          "id": "u27-2025-08-10-1754920001048"
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "name": "Monitor",
+      "price": 299.99,
+      "description": "24-inch Full HD monitor",
+      "category": "Electronics",
+      "quantity": 20,
+      "sales": [
+        {
+          "userId": "u30",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u30-2025-08-11-1754920001049"
+        },
+        {
+          "userId": "u39",
+          "quantity": 2,
+          "date": "2025-08-08",
+          "id": "u39-2025-08-08-1754920001050"
+        }
+      ]
+    },
+    {
+      "id": "p20",
+      "name": "Sneakers",
+      "price": 79.99,
+      "description": "Casual canvas sneakers",
+      "category": "Footwear",
+      "quantity": 65,
+      "sales": [
+        {
+          "userId": "u33",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u33-2025-08-12-1754920001051"
+        },
+        {
+          "userId": "u46",
+          "quantity": 2,
+          "date": "2025-08-11",
+          "id": "u46-2025-08-11-1754920001052"
+        },
+        {
+          "userId": "u14",
+          "quantity": 1,
+          "date": "2025-08-09",
+          "id": "u14-2025-08-09-1754920001053"
+        }
+      ]
+    },
+    {
+      "id": "p21",
+      "name": "Power Bank",
+      "price": 39.99,
+      "description": "10000mAh portable power bank",
+      "category": "Electronics",
+      "quantity": 85,
+      "sales": [
+        {
+          "userId": "u16",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u16-2025-08-12-1754920001054"
+        },
+        {
+          "userId": "u28",
+          "quantity": 3,
+          "date": "2025-08-11",
+          "id": "u28-2025-08-11-1754920001055"
+        },
+        {
+          "userId": "u42",
+          "quantity": 2,
+          "date": "2025-08-10",
+          "id": "u42-2025-08-10-1754920001056"
+        }
+      ]
+    },
+    {
+      "id": "p22",
+      "name": "Cookbook",
+      "price": 24.99,
+      "description": "Beginner's guide to healthy cooking",
+      "category": "Books",
+      "quantity": 50,
+      "sales": [
+        {
+          "userId": "u18",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u18-2025-08-11-1754920001057"
+        },
+        {
+          "userId": "u36",
+          "quantity": 2,
+          "date": "2025-08-09",
+          "id": "u36-2025-08-09-1754920001058"
+        }
+      ]
+    },
+    {
+      "id": "p23",
+      "name": "Wireless Earbuds",
+      "price": 159.99,
+      "description": "True wireless earbuds with noise cancellation",
+      "category": "Electronics",
+      "quantity": 40,
+      "sales": [
+        {
+          "userId": "u12",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "u12-2025-08-12-1754920001059"
+        },
+        {
+          "userId": "u24",
+          "quantity": 2,
+          "date": "2025-08-10",
+          "id": "u24-2025-08-10-1754920001060"
+        },
+        {
+          "userId": "u45",
+          "quantity": 1,
+          "date": "2025-08-09",
+          "id": "u45-2025-08-09-1754920001061"
+        }
+      ]
+    },
+    {
+      "id": "p24",
+      "name": "Phone Case",
+      "price": 14.99,
+      "description": "Protective silicone phone case",
+      "category": "Accessories",
+      "quantity": 150,
+      "sales": [
+        {
+          "userId": "u20",
+          "quantity": 2,
+          "date": "2025-08-12",
+          "id": "u20-2025-08-12-1754920001062"
+        },
+        {
+          "userId": "u32",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u32-2025-08-11-1754920001063"
+        },
+        {
+          "userId": "u47",
+          "quantity": 4,
+          "date": "2025-08-10",
+          "id": "u47-2025-08-10-1754920001064"
+        },
+        {
+          "userId": "u50",
+          "quantity": 3,
+          "date": "2025-08-09",
+          "id": "u50-2025-08-09-1754920001065"
+        }
+      ]
+    },
+    {
+      "id": "p25",
+      "name": "Gaming Chair",
+      "price": 199.99,
+      "description": "Ergonomic gaming chair with lumbar support",
+      "category": "Furniture",
+      "quantity": 15,
+      "sales": [
+        {
+          "userId": "u17",
+          "quantity": 1,
+          "date": "2025-08-11",
+          "id": "u17-2025-08-11-1754920001066"
+        },
+        {
+          "userId": "u40",
+          "quantity": 1,
+          "date": "2025-08-08",
+          "id": "u40-2025-08-08-1754920001067"
+        }
+      ]
+    },
+    {
+      "id": "8e08",
       "name": "phone",
-      "price": 100,
+      "price": 20,
       "description": "nice phone",
-      "category": "Electronics"
+      "category": "Electronics",
+      "quantity": 2,
+      "sales": [
+        {
+          "userId": "e19b",
+          "quantity": 1,
+          "date": "2025-08-12",
+          "id": "e19b-2025-08-12-1754991082375"
+        }
+      ]
     }
   ]
 }

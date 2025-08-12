@@ -6,7 +6,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -19,9 +18,12 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import Typography from '@mui/material/Typography';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import { atomicFetch } from '../utils/atomicFetch';
+import { API_BASE } from '../config';
+import Paper from '@mui/material/Paper';
 
-const API_BASE = 'http://localhost:5000';
 
 export default function UserManager() {
 
@@ -31,6 +33,12 @@ export default function UserManager() {
     const [form, setForm] = useState({ name: '', email: '', gender: '', category: '' });
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
+    const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+
+    const handleSnackbarClose = (_, reason) => {
+        if (reason === 'clickaway') return;
+        setSnackbar((prev) => ({ ...prev, open: false }));
+    };
 
 
     const refreshUsers = async () => {
@@ -47,7 +55,7 @@ export default function UserManager() {
             users.set(unique);
         } catch (e) {
             console.error('Failed to load users:', e.message);
-            alert(`Failed to load users: ${e.message}. Please check if the server is running.`);
+            setSnackbar({ open: true, message: `Failed to load users: ${e.message}. Please check if the server is running.`, severity: 'error' });
             users.set([]);
         } finally {
             setLoading(false);
@@ -173,10 +181,11 @@ export default function UserManager() {
 
                 await refreshUsers();
             }
+            setSnackbar({ open: true, message: 'User saved successfully.', severity: 'success' });
             handleClose();
         } catch (e) {
             console.error('Failed to save user:', e.message);
-            alert(`Failed to save user: ${e.message}. Please try again.`);
+            setSnackbar({ open: true, message: `Failed to save user: ${e.message}. Please try again.`, severity: 'error' });
         }
     };
 
@@ -201,9 +210,10 @@ export default function UserManager() {
                 }
             }
             await refreshUsers();
+            setSnackbar({ open: true, message: 'User deleted successfully.', severity: 'success' });
         } catch (e) {
             console.error('Failed to delete user:', e.message);
-            alert(`Failed to delete user: ${e.message}. Please try again.`);
+            setSnackbar({ open: true, message: `Failed to delete user: ${e.message}. Please try again.`, severity: 'error' });
         }
     };
 
@@ -354,6 +364,16 @@ export default function UserManager() {
                     </Button>
                 </DialogActions>
             </Dialog>
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={3000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+                <Alert onClose={handleSnackbarClose} severity={snackbar.severity} sx={{ width: '100%' }}>
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </div>
     );
 }

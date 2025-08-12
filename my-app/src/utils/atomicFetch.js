@@ -57,7 +57,7 @@ export const atomicFetch = async (
       };
     }
 
-    // For other APIs that follow the standard format
+
     return {
       data: json.data,
       error: json.error,
