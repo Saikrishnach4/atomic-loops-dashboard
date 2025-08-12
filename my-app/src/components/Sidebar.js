@@ -89,6 +89,8 @@ export default function Sidebar({ mobileOpen, onClose }) {
         </>
     );
 
+
+
     if (isDesktop) {
         return (
             <Drawer
