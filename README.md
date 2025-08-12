@@ -30,7 +30,7 @@ Before running this project, make sure you have:
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Saikrishnach4/atomic-loops-dashboard.git
 cd al-dashboard
 ```
 
@@ -43,14 +43,14 @@ npm install
 ### 3. Start JSON Server (API)
 Open a new terminal and run:
 ```bash
-# From the project root (al-dashboard folder)
+
 json-server --watch db.json --port 5000
 ```
 
 ### 4. Start React App
 In another terminal, run:
 ```bash
-# From the my-app folder
+
 npm start
 ```
 
