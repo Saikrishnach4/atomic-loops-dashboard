@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useHookstate } from '@hookstate/core';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -18,13 +19,13 @@ import MenuItem from '@mui/material/MenuItem';
 import TablePagination from '@mui/material/TablePagination';
 
 export default function SalesTable({ rows }) {
-  const [selectedIds, setSelectedIds] = useState(new Set());
-  const [dateFilter, setDateFilter] = useState('all');
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(20);
+  const selectedIds = useHookstate(new Set());
+  const dateFilter = useHookstate('all');
+  const page = useHookstate(0);
+  const rowsPerPage = useHookstate(20);
 
   useEffect(() => {
-    setSelectedIds(new Set());
+    selectedIds.set(new Set());
   }, [rows]);
 
   const uniqueDates = useMemo(
@@ -36,27 +37,27 @@ export default function SalesTable({ rows }) {
     [rows]
   );
   const visibleRows = useMemo(
-    () => (dateFilter === 'all' ? sortedAllRows : rows.filter((r) => r.date === dateFilter)),
-    [rows, dateFilter, sortedAllRows]
+    () => (dateFilter.get() === 'all' ? sortedAllRows : rows.filter((r) => r.date === dateFilter.get())),
+    [rows, dateFilter.get(), sortedAllRows]
   );
 
   // Reset to first page whenever visible rows or filter changes
   useEffect(() => {
-    setPage(0);
-  }, [dateFilter, rows.length]);
+    page.set(0);
+  }, [dateFilter.get(), rows.length]);
 
   const total = visibleRows.length;
-  const selectedCount = selectedIds.size;
+  const selectedCount = selectedIds.get().size;
   const allSelected = total > 0 && selectedCount === total;
   const isIndeterminate = selectedCount > 0 && selectedCount < total;
 
   const toggleAll = () => {
-    if (allSelected || isIndeterminate) setSelectedIds(new Set());
-    else setSelectedIds(new Set(visibleRows.map((r) => r.id)));
+    if (allSelected || isIndeterminate) selectedIds.set(new Set());
+    else selectedIds.set(new Set(visibleRows.map((r) => r.id)));
   };
 
   const toggleRow = (id) => {
-    setSelectedIds((prev) => {
+    selectedIds.set((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
@@ -68,10 +69,10 @@ export default function SalesTable({ rows }) {
     new Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(Number(num || 0));
 
   const paginatedRows = useMemo(() => {
-    if (rowsPerPage === -1) return visibleRows;
-    const start = page * rowsPerPage;
-    return visibleRows.slice(start, start + rowsPerPage);
-  }, [visibleRows, page, rowsPerPage]);
+    if (rowsPerPage.get() === -1) return visibleRows;
+    const start = page.get() * rowsPerPage.get();
+    return visibleRows.slice(start, start + rowsPerPage.get());
+  }, [visibleRows, page.get(), rowsPerPage.get()]);
 
   return (
     <Card variant="outlined" sx={{ borderRadius: 2, mt: 3 }}>
@@ -84,11 +85,11 @@ export default function SalesTable({ rows }) {
             <InputLabel id="sales-date-filter-label">Filter by Date</InputLabel>
             <Select
               labelId="sales-date-filter-label"
-              value={dateFilter}
+              value={dateFilter.get()}
               label="Filter by Date"
               onChange={(e) => {
-                setSelectedIds(new Set());
-                setDateFilter(e.target.value);
+                selectedIds.set(new Set());
+                dateFilter.set(e.target.value);
               }}
             >
               <MenuItem value="all">All dates</MenuItem>
@@ -120,7 +121,7 @@ export default function SalesTable({ rows }) {
             </TableHead>
             <TableBody>
               {paginatedRows.map((r, idx) => {
-                const checked = selectedIds.has(r.id);
+                const checked = selectedIds.get().has(r.id);
                 return (
                   <TableRow
                     key={r.id}
@@ -150,13 +151,13 @@ export default function SalesTable({ rows }) {
         <TablePagination
           component="div"
           count={visibleRows.length}
-          page={page}
-          onPageChange={(_, newPage) => setPage(newPage)}
-          rowsPerPage={rowsPerPage}
+          page={page.get()}
+          onPageChange={(_, newPage) => page.set(newPage)}
+          rowsPerPage={rowsPerPage.get()}
           onRowsPerPageChange={(e) => {
             const next = parseInt(e.target.value, 10);
-            setRowsPerPage(Number.isNaN(next) ? 10 : next);
-            setPage(0);
+            rowsPerPage.set(Number.isNaN(next) ? 10 : next);
+            page.set(0);
           }}
           rowsPerPageOptions={[5, 10, 20, 50]}
           labelRowsPerPage="Rows per page:"

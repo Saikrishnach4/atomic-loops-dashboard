@@ -2,10 +2,10 @@
   "users": [
     {
       "id": "u1",
-      "name": "Alice Johnson",
+      "name": "Alice Johnson burgerss ",
       "email": "alice@example.com",
-      "gender": "Female",
-      "category": "Employee"
+      "gender": "Male",
+      "category": "Student"
     },
     {
       "id": "u2",
@@ -163,7 +163,7 @@
     },
     {
       "id": "u23",
-      "name": "William Garcia",
+      "name": "William Grace",
       "email": "william.garcia@example.com",
       "gender": "Male",
       "category": "Student"
@@ -306,7 +306,7 @@
       "name": "Quinn Parker",
       "email": "quinn.parker@example.com",
       "gender": "Other",
-      "category": "Student"
+      "category": "Employee"
     },
     {
       "id": "u44",
@@ -356,16 +356,44 @@
       "email": "ximena.vargas@example.com",
       "gender": "Female",
       "category": "Other"
+    },
+    {
+      "id": "8d8c",
+      "name": "sai",
+      "email": "saikrishnachippa4@gmail.com",
+      "gender": "Male",
+      "category": "Student"
+    },
+    {
+      "id": "f00c",
+      "name": "Saikrishna Ch",
+      "email": "saikrishnachippa1234@gmail.com",
+      "gender": "Male",
+      "category": "Employee"
+    },
+    {
+      "id": "bff8",
+      "name": "saikrishna chippa",
+      "email": "saikrishnachippa123@gmail.com",
+      "gender": "Male",
+      "category": "Student"
+    },
+    {
+      "id": "0dba",
+      "name": "test-user",
+      "email": "testuser@gmail.com",
+      "gender": "Other",
+      "category": "Other"
     }
   ],
   "products": [
     {
       "id": "p1",
       "name": "Smartphone",
-      "price": 700,
+      "price": 701,
       "description": "Latest model smartphone",
       "category": "Electronics",
-      "quantity": 45,
+      "quantity": 46,
       "sales": [
         {
           "userId": "u1",
@@ -410,17 +438,17 @@
           "id": "u27-2025-08-11-1754920001002"
         },
         {
-          "userId": "u33",
-          "quantity": 1,
-          "date": "2025-08-10",
-          "id": "u33-2025-08-10-1754920001003"
+          "userId": "f00c",
+          "quantity": 23,
+          "date": "2025-08-13",
+          "id": "f00c-2025-08-13-1755064714467"
         }
       ]
     },
     {
       "id": "p2",
       "name": "T-Shirt",
-      "price": 19.99,
+      "price": 19,
       "description": "Comfortable cotton t-shirt",
       "category": "Clothing",
       "quantity": 85,
@@ -454,6 +482,12 @@
           "quantity": 4,
           "date": "2025-08-10",
           "id": "u28-2025-08-10-1754920001006"
+        },
+        {
+          "userId": "u3",
+          "quantity": 1,
+          "date": "2025-08-13",
+          "id": "u3-2025-08-13-1755076545267"
         }
       ]
     },
@@ -570,7 +604,7 @@
       "name": "Backpack",
       "price": 35,
       "description": "Waterproof travel backpack",
-      "category": "Accessories",
+      "category": "Electronics",
       "quantity": 90,
       "sales": [
         {
@@ -632,8 +666,8 @@
       "name": "Office Chair",
       "price": 250,
       "description": "Ergonomic office chair",
-      "category": "Furniture",
-      "quantity": 18,
+      "category": "Home & Garden",
+      "quantity": 19,
       "sales": [
         {
           "userId": "u10",
@@ -660,7 +694,7 @@
       "name": "Running Shoes",
       "price": 89.99,
       "description": "Lightweight running shoes",
-      "category": "Footwear",
+      "category": "Other",
       "quantity": 50,
       "sales": [
         {
@@ -692,7 +726,7 @@
     {
       "id": "p10",
       "name": "Smartwatch",
-      "price": 199.99,
+      "price": 199,
       "description": "Fitness tracking smartwatch",
       "category": "Electronics",
       "quantity": 32,
@@ -784,7 +818,7 @@
       "name": "Desk Lamp",
       "price": 45,
       "description": "LED desk lamp with adjustable brightness",
-      "category": "Home & Office",
+      "category": "Home & Garden",
       "quantity": 60,
       "sales": [
         {
@@ -1120,6 +1154,44 @@
           "quantity": 1,
           "date": "2025-08-12",
           "id": "e19b-2025-08-12-1754991082375"
+        }
+      ]
+    },
+    {
+      "id": "c7f3",
+      "name": "iphone 16 pro max",
+      "price": 100,
+      "description": "iphone with 16 pro features",
+      "category": "Electronics",
+      "quantity": 10,
+      "sales": [
+        {
+          "userId": "8d8c",
+          "quantity": 5,
+          "date": "2025-08-13",
+          "id": "8d8c-2025-08-13-1755077846555"
+        }
+      ]
+    },
+    {
+      "id": "19fc",
+      "name": "test-product",
+      "price": 10,
+      "description": "test product for testing",
+      "category": "Other",
+      "quantity": 10,
+      "sales": [
+        {
+          "userId": "0dba",
+          "quantity": 5,
+          "date": "2025-08-13",
+          "id": "0dba-2025-08-13-1755078319066"
+        },
+        {
+          "userId": "u7",
+          "quantity": 2,
+          "date": "2025-08-13",
+          "id": "u7-2025-08-13-1755078353341"
         }
       ]
     }
