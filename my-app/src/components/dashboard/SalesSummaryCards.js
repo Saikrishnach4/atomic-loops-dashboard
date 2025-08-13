@@ -1,4 +1,5 @@
 import React from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -28,8 +29,9 @@ function KpiCard({ icon, label, value, gradient }) {
 
 export default function SalesSummaryCards({ totalRevenue, unitsSold, lowStockCount, orders }) {
   const currency = new Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  const isSmallScreen = useMediaQuery('(max-width:650px)');
   return (
-    <Grid container spacing={2} sx={{ mb: 2 }}>
+    <Grid container direction={isSmallScreen ? 'column' : 'row'} spacing={2} sx={{ mb: 2 }}>
       <Grid item xs={12} sm={6} md={3}>
         <KpiCard
           icon={<MonetizationOnIcon color="primary" />}
