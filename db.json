@@ -5,14 +5,14 @@
       "name": "Alice Johnson burgerss ",
       "email": "alice@example.com",
       "gender": "Male",
-      "category": "Student"
+      "category": "Employee"
     },
     {
       "id": "u2",
       "name": "Bob Smith",
       "email": "bob@example.com",
       "gender": "Male",
-      "category": "Student"
+      "category": "Employee"
     },
     {
       "id": "u3",
@@ -26,7 +26,7 @@
       "name": "Diana Patel",
       "email": "diana@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Student"
     },
     {
       "id": "u5",
@@ -68,7 +68,7 @@
       "name": "Julia Roberts",
       "email": "julia@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Other"
     },
     {
       "id": "u11",
@@ -334,7 +334,7 @@
       "name": "Ulrich Schmidt",
       "email": "ulrich.schmidt@example.com",
       "gender": "Male",
-      "category": "Other"
+      "category": "Student"
     },
     {
       "id": "u48",
@@ -376,7 +376,7 @@
       "name": "saikrishna chippa",
       "email": "saikrishnachippa123@gmail.com",
       "gender": "Male",
-      "category": "Student"
+      "category": "Other"
     },
     {
       "id": "0dba",
@@ -436,12 +436,6 @@
           "quantity": 3,
           "date": "2025-08-11",
           "id": "u27-2025-08-11-1754920001002"
-        },
-        {
-          "userId": "f00c",
-          "quantity": 23,
-          "date": "2025-08-13",
-          "id": "f00c-2025-08-13-1755064714467"
         }
       ]
     },

@@ -124,25 +124,13 @@ export default function UserManager() {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(form.get().email.trim())) {
                 newErrors.email = 'Please enter a valid email address';
-            } else {
-                // Check for email uniqueness (only for new users, not when editing)
-                if (editingId.get() === null) {
-                    const existingUser = users.get().find(user => 
-                        user.email.toLowerCase() === form.get().email.trim().toLowerCase()
-                    );
-                    if (existingUser) {
-                        newErrors.email = 'User with this email already exists';
-                    }
-                } else {
-                    // When editing, check if email exists for other users
-                    const existingUser = users.get().find(user => 
-                        user.id !== editingId.get() && 
-                        user.email.toLowerCase() === form.get().email.trim().toLowerCase()
-                    );
-                    if (existingUser) {
-                        newErrors.email = 'User with this email already exists';
-                    }
-                }
+            } else if (editingId.get() === null) {
+                // Only enforce uniqueness on create
+                const list = users.get({ noproxy: true }) || [];
+                const exists = Array.isArray(list) && list.some(u =>
+                    u && typeof u.email === 'string' && u.email.toLowerCase() === form.get().email.trim().toLowerCase()
+                );
+                if (exists) newErrors.email = 'User with this email already exists';
             }
         }
 
