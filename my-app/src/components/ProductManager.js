@@ -54,7 +54,15 @@ export default function ProductManager() {
 
             const list = Array.isArray(result.data) ? result.data : [];
             const unique = Array.from(new Map(list.map((p) => [p.id, p])).values());
-            products.set(unique);
+            const sorted = [...unique].sort((a, b) => {
+                const aTime = a && a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                const bTime = b && b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                if (aTime !== bTime) return bTime - aTime;
+                const aId = String(a?.id ?? '');
+                const bId = String(b?.id ?? '');
+                return bId.localeCompare(aId);
+            });
+            products.set(sorted);
         } catch (e) {
             console.error('Failed to load products:', e.message);
             snackbar.set({ open: true, message: `Failed to load products: ${e.message}. Please check if the server is running.`, severity: 'error' });
@@ -200,7 +208,7 @@ export default function ProductManager() {
                 } else {
                     const createResult = await atomicFetch(`${API_BASE}/products`, {
                         method: 'POST',
-                        body: payload
+                        body: { ...payload, createdAt: new Date().toISOString() }
                     });
 
                     if (!createResult.success) {
@@ -221,7 +229,7 @@ export default function ProductManager() {
 
                 const result = await atomicFetch(`${API_BASE}/products`, {
                     method: 'POST',
-                    body: payload
+                    body: { ...payload, createdAt: new Date().toISOString() }
                 });
 
                 if (!result.success) {

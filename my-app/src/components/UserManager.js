@@ -52,7 +52,15 @@ export default function UserManager() {
 
             const list = Array.isArray(result.data) ? result.data : [];
             const unique = Array.from(new Map(list.map((u) => [u.id, u])).values());
-            users.set(unique);
+            const sorted = [...unique].sort((a, b) => {
+                const aTime = a && a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                const bTime = b && b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                if (aTime !== bTime) return bTime - aTime;
+                const aId = String(a?.id ?? '');
+                const bId = String(b?.id ?? '');
+                return bId.localeCompare(aId);
+            });
+            users.set(sorted);
         } catch (e) {
             console.error('Failed to load users:', e.message);
             snackbar.set({ open: true, message: `Failed to load users: ${e.message}. Please check if the server is running.`, severity: 'error' });
@@ -175,7 +183,7 @@ export default function UserManager() {
                 } else {
                     const createResult = await atomicFetch(`${API_BASE}/users`, {
                         method: 'POST',
-                        body: payload
+                        body: { ...payload, createdAt: new Date().toISOString() }
                     });
 
                     if (!createResult.success) {
@@ -187,7 +195,7 @@ export default function UserManager() {
 
                 const result = await atomicFetch(`${API_BASE}/users`, {
                     method: 'POST',
-                    body: form.get()
+                    body: { ...form.get(), createdAt: new Date().toISOString() }
                 });
 
                 if (!result.success) {
