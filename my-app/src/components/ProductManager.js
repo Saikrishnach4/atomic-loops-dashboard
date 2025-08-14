@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useHookstate } from '@hookstate/core';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -28,24 +28,24 @@ const today = new Date().toISOString().split("T")[0];
 export default function ProductManager() {
 
     const products = useHookstate([]);
-    const [allUsers, setAllUsers] = useState([]);
-    const [open, setOpen] = useState(false);
-    const [editingId, setEditingId] = useState(null);
-    const [form, setForm] = useState({ name: '', price: '', description: '', category: '', quantity: '', sales: [] });
-    const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false);
-    const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
-    const [saleDraft, setSaleDraft] = useState({ userId: '', quantity: '', date: new Date().toISOString().slice(0, 10) });
+    const allUsers = useHookstate([]);
+    const open = useHookstate(false);
+    const editingId = useHookstate(null);
+    const form = useHookstate({ name: '', price: '', description: '', category: '', quantity: '', sales: [] });
+    const errors = useHookstate({});
+    const loading = useHookstate(false);
+    const snackbar = useHookstate({ open: false, message: '', severity: 'success' });
+    const saleDraft = useHookstate({ userId: '', quantity: '', date: new Date().toISOString().slice(0, 10) });
 
     const handleSnackbarClose = (_, reason) => {
         if (reason === 'clickaway') return;
-        setSnackbar((prev) => ({ ...prev, open: false }));
+        snackbar.set({ ...snackbar.get(), open: false });
     };
 
 
     const refreshProducts = async () => {
         try {
-            setLoading(true);
+            loading.set(true);
             const result = await atomicFetch(`${API_BASE}/products`);
 
             if (!result.success) {
@@ -54,13 +54,21 @@ export default function ProductManager() {
 
             const list = Array.isArray(result.data) ? result.data : [];
             const unique = Array.from(new Map(list.map((p) => [p.id, p])).values());
-            products.set(unique);
+            const sorted = [...unique].sort((a, b) => {
+                const aTime = a && a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                const bTime = b && b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                if (aTime !== bTime) return bTime - aTime;
+                const aId = String(a?.id ?? '');
+                const bId = String(b?.id ?? '');
+                return bId.localeCompare(aId);
+            });
+            products.set(sorted);
         } catch (e) {
             console.error('Failed to load products:', e.message);
-            setSnackbar({ open: true, message: `Failed to load products: ${e.message}. Please check if the server is running.`, severity: 'error' });
+            snackbar.set({ open: true, message: `Failed to load products: ${e.message}. Please check if the server is running.`, severity: 'error' });
             products.set([]);
         } finally {
-            setLoading(false);
+            loading.set(false);
         }
     };
 
@@ -69,44 +77,46 @@ export default function ProductManager() {
         // Load users for sales association
         (async () => {
             const result = await atomicFetch(`${API_BASE}/users`);
-            if (result.success && Array.isArray(result.data)) setAllUsers(result.data);
+            if (result.success && Array.isArray(result.data)) allUsers.set(result.data);
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
     const handleOpen = (id = null) => {
-        setEditingId(id);
+        editingId.set(id);
         if (id !== null) {
-            const existing = products.get().find((p) => p && p.id === id);
+            const list = products.get({ noproxy: true });
+            const existing = Array.isArray(list) ? list.find((p) => p && p.id === id) : null;
             if (existing) {
-                setForm({
+                form.set({
                     name: existing.name || '',
                     price: existing.price ?? '',
                     description: existing.description || '',
                     category: existing.category || '',
                     quantity: existing.quantity ?? '',
-                    sales: Array.isArray(existing.sales) ? existing.sales : []
+                    sales: Array.isArray(existing.sales) ? existing.sales.map((s) => ({ ...s })) : []
                 });
             }
         } else {
-            setForm({ name: '', price: '', description: '', category: '', quantity: '', sales: [] });
+            form.set({ name: '', price: '', description: '', category: '', quantity: '', sales: [] });
         }
-        setErrors({});
-        setOpen(true);
+        errors.set({});
+        open.set(true);
     };
 
 
     const handleClose = () => {
-        setOpen(false);
-        setForm({ name: '', price: '', description: '', category: '', quantity: '', sales: [] });
-        setEditingId(null);
-        setErrors({});
+        open.set(false);
+        form.set({ name: '', price: '', description: '', category: '', quantity: '', sales: [] });
+        editingId.set(null);
+        errors.set({});
     };
 
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const current = form.get({ noproxy: true });
+        form.set({ ...current, [e.target.name]: e.target.value });
     };
 
 
@@ -114,46 +124,52 @@ export default function ProductManager() {
         const newErrors = {};
 
 
-        if (!form.name.trim()) {
+        if (!form.get().name.trim()) {
             newErrors.name = 'Name is required';
-        } else if (form.name.trim().length < 2) {
+        } else if (form.get().name.trim().length < 2) {
             newErrors.name = 'Name must be at least 2 characters';
-        } else if (form.name.trim().length > 100) {
+        } else if (form.get().name.trim().length > 100) {
             newErrors.name = 'Name must be less than 100 characters';
+        } else {
+
+            const nameRegex = /^[a-zA-Z0-9\s\-']+$/;
+            if (!nameRegex.test(form.get().name.trim())) {
+                newErrors.name = 'Product name can only contain letters, numbers, spaces, hyphens, and apostrophes';
+            }
         }
 
 
-        if (!form.price || form.price === '') {
+        if (!form.get().price || form.get().price === '') {
             newErrors.price = 'Price is required';
-        } else if (isNaN(form.price) || Number(form.price) <= 0) {
+        } else if (isNaN(form.get().price) || Number(form.get().price) <= 0) {
             newErrors.price = 'Price must be a positive number';
-        } else if (Number(form.price) > 999999) {
+        } else if (Number(form.get().price) > 999999) {
             newErrors.price = 'Price must be less than 1,000,000';
         }
 
 
-        if (!form.description.trim()) {
+        if (!form.get().description.trim()) {
             newErrors.description = 'Description is required';
-        } else if (form.description.trim().length < 10) {
+        } else if (form.get().description.trim().length < 10) {
             newErrors.description = 'Description must be at least 10 characters';
-        } else if (form.description.trim().length > 500) {
+        } else if (form.get().description.trim().length > 500) {
             newErrors.description = 'Description must be less than 500 characters';
         }
 
 
-        if (!form.category) {
+        if (!form.get().category) {
             newErrors.category = 'Category is required';
         }
 
-        if (form.quantity === '' || isNaN(form.quantity)) {
+        if (form.get().quantity === '' || isNaN(form.get().quantity)) {
             newErrors.quantity = 'Quantity is required';
-        } else if (Number(form.quantity) < 0) {
+        } else if (Number(form.get().quantity) < 0) {
             newErrors.quantity = 'Quantity must be 0 or greater';
-        } else if (!Number.isInteger(Number(form.quantity))) {
+        } else if (!Number.isInteger(Number(form.get().quantity))) {
             newErrors.quantity = 'Quantity must be an integer';
         }
 
-        setErrors(newErrors);
+        errors.set(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
@@ -161,18 +177,18 @@ export default function ProductManager() {
     const handleSave = async () => {
         if (!validate()) return;
         try {
-            if (editingId !== null) {
+            if (editingId.get() !== null) {
 
                 const payload = {
-                    name: form.name,
-                    price: Number(form.price),
-                    description: form.description,
-                    category: form.category,
-                    quantity: Number(form.quantity),
-                    sales: Array.isArray(form.sales) ? form.sales : []
+                    name: form.get().name,
+                    price: Number(form.get().price),
+                    description: form.get().description,
+                    category: form.get().category,
+                    quantity: Number(form.get().quantity),
+                    sales: Array.isArray(form.get().sales) ? form.get().sales : []
                 };
 
-                const checkResult = await atomicFetch(`${API_BASE}/products?id=${editingId}`);
+                const checkResult = await atomicFetch(`${API_BASE}/products?id=${editingId.get()}`);
 
                 if (!checkResult.success) {
                     throw new Error(`Lookup failed: ${checkResult.status}`);
@@ -192,7 +208,7 @@ export default function ProductManager() {
                 } else {
                     const createResult = await atomicFetch(`${API_BASE}/products`, {
                         method: 'POST',
-                        body: payload
+                        body: { ...payload, createdAt: new Date().toISOString() }
                     });
 
                     if (!createResult.success) {
@@ -203,17 +219,17 @@ export default function ProductManager() {
             } else {
 
                 const payload = {
-                    name: form.name,
-                    price: Number(form.price),
-                    description: form.description,
-                    category: form.category,
-                    quantity: Number(form.quantity),
-                    sales: Array.isArray(form.sales) ? form.sales : []
+                    name: form.get().name,
+                    price: Number(form.get().price),
+                    description: form.get().description,
+                    category: form.get().category,
+                    quantity: Number(form.get().quantity),
+                    sales: Array.isArray(form.get().sales) ? form.get().sales : []
                 };
 
                 const result = await atomicFetch(`${API_BASE}/products`, {
                     method: 'POST',
-                    body: payload
+                    body: { ...payload, createdAt: new Date().toISOString() }
                 });
 
                 if (!result.success) {
@@ -222,11 +238,11 @@ export default function ProductManager() {
 
                 await refreshProducts();
             }
-            setSnackbar({ open: true, message: 'Product saved successfully.', severity: 'success' });
+            snackbar.set({ open: true, message: 'Product saved successfully.', severity: 'success' });
             handleClose();
         } catch (e) {
             console.error('Failed to save product:', e.message);
-            setSnackbar({ open: true, message: `Failed to save product: ${e.message}. Please try again.`, severity: 'error' });
+            snackbar.set({ open: true, message: `Failed to save product: ${e.message}. Please try again.`, severity: 'error' });
         }
     };
 
@@ -251,49 +267,54 @@ export default function ProductManager() {
                 }
             }
             await refreshProducts();
-            setSnackbar({ open: true, message: 'Product deleted successfully.', severity: 'success' });
+            snackbar.set({ open: true, message: 'Product deleted successfully.', severity: 'success' });
         } catch (e) {
             console.error('Failed to delete product:', e.message);
-            setSnackbar({ open: true, message: `Failed to delete product: ${e.message}. Please try again.`, severity: 'error' });
+            snackbar.set({ open: true, message: `Failed to delete product: ${e.message}. Please try again.`, severity: 'error' });
         }
     };
 
     const resolveUserName = (userId) => {
-        const u = allUsers.find((x) => x.id === userId);
+        const u = allUsers.get().find((x) => x.id === userId);
         return u ? u.name : userId;
     };
 
     const handleAddSale = () => {
         const errorsLocal = {};
-        if (!saleDraft.userId) errorsLocal.userId = 'User required';
-        if (saleDraft.quantity === '' || Number(saleDraft.quantity) <= 0) errorsLocal.quantity = 'Quantity must be > 0';
-        if (!saleDraft.date) errorsLocal.date = 'Date required';
+        if (!saleDraft.get().userId) errorsLocal.userId = 'User required';
+        if (saleDraft.get().quantity === '' || Number(saleDraft.get().quantity) <= 0) errorsLocal.quantity = 'Quantity must be > 0';
+        if (!saleDraft.get().date) errorsLocal.date = 'Date required';
         // Stock validation
-        const qty = Number(saleDraft.quantity || 0);
+        const qty = Number(saleDraft.get().quantity || 0);
         if (qty > remainingStock) {
-            setSnackbar({ open: true, message: `Quantity exceeds available stock. Remaining: ${remainingStock}`, severity: 'error' });
+            snackbar.set({ open: true, message: `Quantity exceeds available stock. Remaining: ${remainingStock}`, severity: 'error' });
             return;
         }
         if (Object.keys(errorsLocal).length > 0) {
-            setSnackbar({ open: true, message: 'Please fix sale entry fields.', severity: 'error' });
+            snackbar.set({ open: true, message: 'Please fix sale entry fields.', severity: 'error' });
             return;
         }
         const entry = {
-            userId: saleDraft.userId,
-            quantity: Number(saleDraft.quantity),
-            date: saleDraft.date,
-            id: `${saleDraft.userId}-${saleDraft.date}-${Date.now()}`
+            userId: saleDraft.get().userId,
+            quantity: Number(saleDraft.get().quantity),
+            date: saleDraft.get().date,
+            id: `${saleDraft.get().userId}-${saleDraft.get().date}-${Date.now()}`
         };
-        setForm((prev) => ({ ...prev, sales: [...prev.sales, entry] }));
-        setSaleDraft({ userId: '', quantity: '', date: new Date().toISOString().slice(0, 10) });
+        const currentForm = form.get({ noproxy: true });
+        const currentSales = Array.isArray(currentForm.sales) ? currentForm.sales : [];
+        form.set({ ...currentForm, sales: [...currentSales, entry] });
+        saleDraft.set({ userId: '', quantity: '', date: new Date().toISOString().slice(0, 10) });
     };
 
     const handleRemoveSale = (id) => {
-        setForm((prev) => ({ ...prev, sales: prev.sales.filter((s) => s.id !== id) }));
+        const currentForm = form.get({ noproxy: true });
+        const nextSales = (Array.isArray(currentForm.sales) ? currentForm.sales : []).filter((s) => s.id !== id);
+        form.set({ ...currentForm, sales: nextSales });
     };
 
-    const totalSold = useMemo(() => (Array.isArray(form.sales) ? form.sales.reduce((sum, s) => sum + Number(s.quantity || 0), 0) : 0), [form.sales]);
-    const remainingStock = useMemo(() => Math.max(0, Number(form.quantity || 0) - totalSold), [form.quantity, totalSold]);
+    const formSnapshot = form.get({ noproxy: true });
+    const totalSold = useMemo(() => (Array.isArray(formSnapshot.sales) ? formSnapshot.sales.reduce((sum, s) => sum + Number(s.quantity || 0), 0) : 0), [formSnapshot.sales]);
+    const remainingStock = useMemo(() => Math.max(0, Number(formSnapshot.quantity || 0) - totalSold), [formSnapshot.quantity, totalSold]);
 
     return (
         <div style={{ padding: '20px' }}>
@@ -329,21 +350,21 @@ export default function ProductManager() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {loading && (
+                        {loading.get() && (
                             <TableRow>
                                 <TableCell colSpan={5} style={{ textAlign: 'center' }}>
                                     Loading products...
                                 </TableCell>
                             </TableRow>
                         )}
-                        {!loading && products.get().length === 0 && (
+                        {!loading.get() && products.get().length === 0 && (
                             <TableRow>
                                 <TableCell colSpan={5} style={{ textAlign: 'center' }}>
                                     No products found. Add your first product!
                                 </TableCell>
                             </TableRow>
                         )}
-                        {!loading && products.get().map((product) => (
+                        {!loading.get() && products.get().map((product) => (
                             <TableRow key={product.id}>
                                 <TableCell>{product.name}</TableCell>
                                 <TableCell>${product.price}</TableCell>
@@ -373,21 +394,21 @@ export default function ProductManager() {
                 </Table>
             </TableContainer>
 
-            <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+            <Dialog open={open.get()} onClose={handleClose} maxWidth="md" fullWidth>
                 <DialogTitle>
-                    {editingId !== null ? 'Edit Product' : 'Add New Product'}
+                    {editingId.get() !== null ? 'Edit Product' : 'Add New Product'}
                 </DialogTitle>
                 <DialogContent>
                     <TextField
                         margin="dense"
                         label="Name"
                         name="name"
-                        value={form.name}
+                        value={form.get().name}
                         onChange={handleChange}
                         fullWidth
                         required
-                        error={!!errors.name}
-                        helperText={errors.name}
+                        error={!!errors.get().name}
+                        helperText={errors.get().name}
                         style={{ marginBottom: '10px' }}
                     />
                     <TextField
@@ -395,12 +416,12 @@ export default function ProductManager() {
                         label="Price"
                         name="price"
                         type="number"
-                        value={form.price}
+                        value={form.get().price}
                         onChange={handleChange}
                         fullWidth
                         required
-                        error={!!errors.price}
-                        helperText={errors.price}
+                        error={!!errors.get().price}
+                        helperText={errors.get().price}
                         style={{ marginBottom: '10px' }}
                     />
                     <TextField
@@ -408,34 +429,34 @@ export default function ProductManager() {
                         label="Quantity"
                         name="quantity"
                         type="number"
-                        value={form.quantity}
+                        value={form.get().quantity}
                         onChange={handleChange}
                         fullWidth
                         required
-                        error={!!errors.quantity}
-                        helperText={errors.quantity}
+                        error={!!errors.get().quantity}
+                        helperText={errors.get().quantity}
                         style={{ marginBottom: '10px' }}
                     />
                     <TextField
                         margin="dense"
                         label="Description"
                         name="description"
-                        value={form.description}
+                        value={form.get().description}
                         onChange={handleChange}
                         fullWidth
                         multiline
                         rows={3}
                         required
-                        error={!!errors.description}
-                        helperText={errors.description}
+                        error={!!errors.get().description}
+                        helperText={errors.get().description}
                         style={{ marginBottom: '10px' }}
                     />
-                    <FormControl fullWidth margin="dense" required error={!!errors.category}>
+                    <FormControl fullWidth margin="dense" required error={!!errors.get().category}>
                         <InputLabel id="category-label">Category</InputLabel>
                         <Select
                             labelId="category-label"
                             name="category"
-                            value={form.category}
+                            value={form.get().category}
                             label="Category"
                             onChange={handleChange}
                         >
@@ -446,7 +467,7 @@ export default function ProductManager() {
                             <MenuItem value="Sports">Sports</MenuItem>
                             <MenuItem value="Other">Other</MenuItem>
                         </Select>
-                        {errors.category && <FormHelperText>{errors.category}</FormHelperText>}
+                        {errors.get().category && <FormHelperText>{errors.get().category}</FormHelperText>}
                     </FormControl>
 
                     <Typography variant="subtitle1" sx={{ mt: 1 }}>Sales</Typography>
@@ -455,11 +476,11 @@ export default function ProductManager() {
                             <InputLabel id="sale-user-label">User</InputLabel>
                             <Select
                                 labelId="sale-user-label"
-                                value={saleDraft.userId}
+                                value={saleDraft.get().userId}
                                 label="User"
-                                onChange={(e) => setSaleDraft((prev) => ({ ...prev, userId: e.target.value }))}
+                                onChange={(e) => saleDraft.set({ ...saleDraft.get(), userId: e.target.value })}
                             >
-                                {allUsers.map((u) => (
+                                {allUsers.get().map((u) => (
                                     <MenuItem key={u.id} value={u.id}>{u.name}</MenuItem>
                                 ))}
                             </Select>
@@ -468,16 +489,16 @@ export default function ProductManager() {
                             label="Qty"
                             type="number"
                             size="small"
-                            value={saleDraft.quantity}
-                            onChange={(e) => setSaleDraft((prev) => ({ ...prev, quantity: e.target.value }))}
+                            value={saleDraft.get().quantity}
+                            onChange={(e) => saleDraft.set({ ...saleDraft.get(), quantity: e.target.value })}
                             style={{ width: 100 }}
                         />
                         <TextField
                             label="Date"
                             type="date"
                             size="small"
-                            value={saleDraft.date}
-                            onChange={(e) => setSaleDraft((prev) => ({ ...prev, date: e.target.value }))}
+                            value={saleDraft.get().date}
+                            onChange={(e) => saleDraft.set({ ...saleDraft.get(), date: e.target.value })}
                             InputLabelProps={{ shrink: true }}
                             inputProps={{ max: today }}
                         />
@@ -495,7 +516,7 @@ export default function ProductManager() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {Array.isArray(form.sales) && form.sales.map((s) => (
+                                {Array.isArray(form.get().sales) && form.get().sales.map((s) => (
                                     <TableRow key={s.id}>
                                         <TableCell>{resolveUserName(s.userId)}</TableCell>
                                         <TableCell>{s.quantity}</TableCell>
@@ -518,18 +539,18 @@ export default function ProductManager() {
                         variant="contained"
                         color="primary"
                     >
-                        {editingId !== null ? 'Update' : 'Save'}
+                        {editingId.get() !== null ? 'Update' : 'Save'}
                     </Button>
                 </DialogActions>
             </Dialog>
             <Snackbar
-                open={snackbar.open}
+                open={snackbar.get().open}
                 autoHideDuration={3000}
                 onClose={handleSnackbarClose}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
             >
-                <Alert onClose={handleSnackbarClose} severity={snackbar.severity} sx={{ width: '100%' }}>
-                    {snackbar.message}
+                <Alert onClose={handleSnackbarClose} severity={snackbar.get().severity} sx={{ width: '100%' }}>
+                    {snackbar.get().message}
                 </Alert>
             </Snackbar>
         </div>

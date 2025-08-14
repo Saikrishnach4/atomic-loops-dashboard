@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useHookstate } from '@hookstate/core';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -14,30 +15,32 @@ import SalesTable from './dashboard/SalesTable';
 import { atomicFetch } from '../utils/atomicFetch';
 import { API_BASE } from '../config';
 import { useTheme } from '@mui/material/styles';
+
 export default function Dashboard() {
-  const [users, setUsers] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [sessions, setSessions] = useState([]);
-  const [pages, setPages] = useState([]);
-  const [salesRows, setSalesRows] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null); // yyyy-mm-dd or null for overall
+  const users = useHookstate([]);
+  const products = useHookstate([]);
+  const loading = useHookstate(true);
+  const sessions = useHookstate([]);
+  const pages = useHookstate([]);
+  const salesRows = useHookstate([]);
+  const selectedDate = useHookstate(null); // yyyy-mm-dd or null for overall
   const today = new Date().toISOString().split("T")[0];
   const theme = useTheme();
+
   useEffect(() => {
     let isMounted = true;
     const load = async () => {
       try {
-        setLoading(true);
+        loading.set(true);
         const [u, p] = await Promise.all([
           atomicFetch(`${API_BASE}/users`),
           atomicFetch(`${API_BASE}/products`),
         ]);
 
         if (isMounted) {
-          setUsers(Array.isArray(u.data) ? u.data : []);
+          users.set(Array.isArray(u.data) ? u.data : []);
           const productList = Array.isArray(p.data) ? p.data : [];
-          setProducts(productList);
+          products.set(productList);
 
           // Aggregate sessions (traffic)
           const trafficMap = new Map();
@@ -52,7 +55,7 @@ export default function Dashboard() {
               trafficMap.set(key, current);
             }
           }
-          setSessions(Array.from(trafficMap.values()));
+          sessions.set(Array.from(trafficMap.values()));
 
           // Pages data
           const pageRows = productList.map((prod) => ({
@@ -65,7 +68,7 @@ export default function Dashboard() {
             avgTimeSec: Number(prod.avgTimeSec || 0),
             dailyConversions: Array.isArray(prod.dailyConversions) ? prod.dailyConversions : [],
           }));
-          setPages(pageRows);
+          pages.set(pageRows);
 
           // Sales rows
           const userMap = new Map((Array.isArray(u.data) ? u.data : []).map((usr) => [usr.id, usr.name]));
@@ -85,10 +88,10 @@ export default function Dashboard() {
               });
             }
           }
-          setSalesRows(rows);
+          salesRows.set(rows);
         }
       } finally {
-        if (isMounted) setLoading(false);
+        if (isMounted) loading.set(false);
       }
     };
     load();
@@ -97,14 +100,14 @@ export default function Dashboard() {
     };
   }, []);
 
-  const totalUsers = users.length;
-  const totalProducts = products.length;
-  const maleUsers = useMemo(() => users.filter((u) => u.gender === 'Male').length, [users]);
-  const femaleUsers = useMemo(() => users.filter((u) => u.gender === 'Female').length, [users]);
+  const totalUsers = users.get().length;
+  const totalProducts = products.get().length;
+  const maleUsers = useMemo(() => users.get().filter((u) => u.gender === 'Male').length, [users.get()]);
+  const femaleUsers = useMemo(() => users.get().filter((u) => u.gender === 'Female').length, [users.get()]);
 
   const activeSessions = useMemo(
-    () => (selectedDate ? sessions.filter((d) => d.date === selectedDate) : sessions),
-    [sessions, selectedDate]
+    () => (selectedDate.get() ? sessions.get().filter((d) => d.date === selectedDate.get()) : sessions.get()),
+    [sessions.get(), selectedDate.get()]
   );
 
   const totalSessions = useMemo(
@@ -113,10 +116,10 @@ export default function Dashboard() {
   );
 
   const percentChange = useMemo(() => {
-    if (sessions.length === 0) return 0;
-    const windowSize = Math.min(7, sessions.length);
-    const firstWindow = sessions.slice(0, windowSize);
-    const lastWindow = sessions.slice(-windowSize);
+    if (sessions.get().length === 0) return 0;
+    const windowSize = Math.min(7, sessions.get().length);
+    const firstWindow = sessions.get().slice(0, windowSize);
+    const lastWindow = sessions.get().slice(-windowSize);
     const sumWindow = (arr) => arr.reduce((s, d) => s + (Number(d.organic || 0) + Number(d.referral || 0) + Number(d.paid || 0)), 0);
     const first = sumWindow(firstWindow);
     const last = sumWindow(lastWindow);
@@ -128,29 +131,29 @@ export default function Dashboard() {
     () => [
       { id: 0, value: maleUsers, label: 'Male' },
       { id: 1, value: femaleUsers, label: 'Female' },
-      { id: 2, value: users.filter((u) => u.gender === 'Other').length, label: 'Other' },
+      { id: 2, value: users.get().filter((u) => u.gender === 'Other').length, label: 'Other' },
     ],
-    [users, maleUsers, femaleUsers]
+    [users.get(), maleUsers, femaleUsers]
   );
 
   const productsByCategory = useMemo(() => {
     const map = new Map();
-    for (const p of products) {
+    for (const p of products.get()) {
       const key = p.category || 'Uncategorized';
       map.set(key, (map.get(key) || 0) + 1);
     }
     const categories = Array.from(map.keys());
     const counts = Array.from(map.values());
     return { categories, counts };
-  }, [products]);
+  }, [products.get()]);
 
   const activeProducts = useMemo(() => {
-    if (!selectedDate) return products;
-    return products.map((p) => ({
+    if (!selectedDate.get()) return products.get();
+    return products.get().map((p) => ({
       ...p,
-      sales: Array.isArray(p.sales) ? p.sales.filter((e) => e.date === selectedDate) : [],
+      sales: Array.isArray(p.sales) ? p.sales.filter((e) => e.date === selectedDate.get()) : [],
     }));
-  }, [products, selectedDate]);
+  }, [products.get(), selectedDate.get()]);
 
   const salesByProduct = useMemo(() => {
     const names = activeProducts.map((p) => p.name);
@@ -183,24 +186,24 @@ export default function Dashboard() {
 
   const summary = useMemo(() => {
     const totalRevenue = revenueTrend.total;
-    const unitsSold = products.reduce((sum, p) => sum + (Array.isArray(p.sales) ? p.sales.reduce((s, e) => s + Number(e.quantity || 0), 0) : 0), 0);
-    const lowStockCount = products.filter((p) => Number(p.quantity || 0) <= 10).length;
-    const orders = products.reduce((sum, p) => sum + (Array.isArray(p.sales) ? p.sales.length : 0), 0);
+    const unitsSold = products.get().reduce((sum, p) => sum + (Array.isArray(p.sales) ? p.sales.reduce((s, e) => s + Number(e.quantity || 0), 0) : 0), 0);
+    const lowStockCount = products.get().filter((p) => Number(p.quantity || 0) <= 10).length;
+    const orders = products.get().reduce((sum, p) => sum + (Array.isArray(p.sales) ? p.sales.length : 0), 0);
     return { totalRevenue, unitsSold, lowStockCount, orders };
   }, [activeProducts, revenueTrend.total]);
 
   const salesRowsVisible = useMemo(
-    () => (selectedDate ? salesRows.filter((r) => r.date === selectedDate) : salesRows),
-    [salesRows, selectedDate]
+    () => (selectedDate.get() ? salesRows.get().filter((r) => r.date === selectedDate.get()) : salesRows.get()),
+    [salesRows.get(), selectedDate.get()]
   );
 
   const availableDates = useMemo(() => {
     const set = new Set([...
-      sessions.map((d) => d.date),
-    salesRows.map((r) => r.date),
+      sessions.get().map((d) => d.date),
+    salesRows.get().map((r) => r.date),
     ]);
     return Array.from(set).filter(Boolean).sort();
-  }, [sessions, salesRows]);
+  }, [sessions.get(), salesRows.get()]);
 
   return (
     <Box sx={{ p: 3, bgcolor: (t) => (t.palette.mode === 'dark' ? 'background.paper' : 'transparent'), borderRadius: 2 }}>
@@ -213,8 +216,8 @@ export default function Dashboard() {
             label="Date"
             type="date"
             size="small"
-            value={selectedDate || ''}
-            onChange={(e) => setSelectedDate(e.target.value || null)}
+            value={selectedDate.get() || ''}
+            onChange={(e) => selectedDate.set(e.target.value || null)}
             InputLabelProps={{ shrink: true }}
             inputProps={{
               max: today,
@@ -229,15 +232,15 @@ export default function Dashboard() {
           />
 
           <Button
-            variant={selectedDate ? 'outlined' : 'contained'}
-            onClick={() => setSelectedDate(null)}
+            variant={selectedDate.get() ? 'outlined' : 'contained'}
+            onClick={() => selectedDate.set(null)}
           >
             Overall
           </Button>
         </Box>
       </Box>
 
-      {loading ? (
+      {loading.get() ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
           <CircularProgress />
         </Box>

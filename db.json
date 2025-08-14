@@ -2,370 +2,421 @@
   "users": [
     {
       "id": "u1",
-      "name": "Alice Johnson",
+      "name": "Alice Johnson burgerss ",
       "email": "alice@example.com",
-      "gender": "Female",
-      "category": "Employee"
+      "gender": "Male",
+      "category": "Student",
+      "createdAt": "2025-08-01T12:00:00.000Z"
     },
     {
       "id": "u2",
       "name": "Bob Smith",
       "email": "bob@example.com",
       "gender": "Male",
-      "category": "Student"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:01:00.000Z"
     },
     {
       "id": "u3",
       "name": "Charlie Brown",
       "email": "charlie@example.com",
       "gender": "Male",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:02:00.000Z"
     },
     {
       "id": "u4",
       "name": "Diana Patel",
       "email": "diana@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:03:00.000Z"
     },
     {
       "id": "u5",
       "name": "Ethan Lee",
       "email": "ethan@example.com",
       "gender": "Male",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:04:00.000Z"
     },
     {
       "id": "u6",
       "name": "Fiona White",
       "email": "fiona@example.com",
       "gender": "Female",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:05:00.000Z"
     },
     {
       "id": "u7",
       "name": "George Hall",
       "email": "george@example.com",
       "gender": "Male",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:06:00.000Z"
     },
     {
       "id": "u8",
       "name": "Hannah Green",
       "email": "hannah@example.com",
       "gender": "Female",
-      "category": "Student"
-    },
-    {
-      "id": "u9",
-      "name": "Ian Clark",
-      "email": "ian@example.com",
-      "gender": "Male",
-      "category": "Employee"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:07:00.000Z"
     },
     {
       "id": "u10",
       "name": "Julia Roberts",
       "email": "julia@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:08:00.000Z"
     },
     {
       "id": "u11",
       "name": "Kevin Brooks",
       "email": "kevin@example.com",
       "gender": "Male",
-      "category": "Student"
-    },
-    {
-      "id": "e19b",
-      "name": "Saikrishna Ch",
-      "email": "saikrishnachippa4@gmail.com",
-      "gender": "Male",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:09:00.000Z"
     },
     {
       "id": "u12",
       "name": "Laura Martinez",
       "email": "laura.martinez@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:11:00.000Z"
     },
     {
       "id": "u13",
       "name": "Michael Chen",
       "email": "michael.chen@example.com",
       "gender": "Male",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:12:00.000Z"
     },
     {
       "id": "u14",
       "name": "Nina Rodriguez",
       "email": "nina.rodriguez@example.com",
       "gender": "Female",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:13:00.000Z"
     },
     {
       "id": "u15",
       "name": "Oliver Thompson",
       "email": "oliver.thompson@example.com",
       "gender": "Male",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:14:00.000Z"
     },
     {
       "id": "u16",
       "name": "Priya Sharma",
       "email": "priya.sharma@example.com",
       "gender": "Female",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:15:00.000Z"
     },
     {
       "id": "u17",
       "name": "Quentin Davis",
       "email": "quentin.davis@example.com",
       "gender": "Male",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:16:00.000Z"
     },
     {
       "id": "u18",
       "name": "Rachel Kim",
       "email": "rachel.kim@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:17:00.000Z"
     },
     {
       "id": "u19",
       "name": "Samuel Wilson",
       "email": "samuel.wilson@example.com",
       "gender": "Male",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:18:00.000Z"
     },
     {
       "id": "u20",
       "name": "Tessa Anderson",
       "email": "tessa.anderson@example.com",
       "gender": "Female",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:19:00.000Z"
     },
     {
       "id": "u21",
       "name": "Umar Hassan",
       "email": "umar.hassan@example.com",
       "gender": "Male",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:20:00.000Z"
     },
     {
       "id": "u22",
       "name": "Victoria Miller",
       "email": "victoria.miller@example.com",
       "gender": "Female",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:21:00.000Z"
     },
     {
       "id": "u23",
-      "name": "William Garcia",
+      "name": "William Grace",
       "email": "william.garcia@example.com",
       "gender": "Male",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:22:00.000Z"
     },
     {
       "id": "u24",
       "name": "Xiomara Lopez",
       "email": "xiomara.lopez@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:23:00.000Z"
     },
     {
       "id": "u25",
       "name": "Yuki Tanaka",
       "email": "yuki.tanaka@example.com",
       "gender": "Female",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:24:00.000Z"
     },
     {
       "id": "u26",
       "name": "Zach Robinson",
       "email": "zach.robinson@example.com",
       "gender": "Male",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:25:00.000Z"
     },
     {
       "id": "u27",
       "name": "Aria Singh",
       "email": "aria.singh@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:26:00.000Z"
     },
     {
       "id": "u28",
       "name": "Benjamin Torres",
       "email": "benjamin.torres@example.com",
       "gender": "Male",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:27:00.000Z"
     },
     {
       "id": "u29",
       "name": "Catherine Moore",
       "email": "catherine.moore@example.com",
       "gender": "Female",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:28:00.000Z"
     },
     {
       "id": "u30",
       "name": "Daniel Wright",
       "email": "daniel.wright@example.com",
       "gender": "Male",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:29:00.000Z"
     },
     {
       "id": "u31",
       "name": "Elena Popov",
       "email": "elena.popov@example.com",
       "gender": "Female",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:30:00.000Z"
     },
     {
       "id": "u32",
       "name": "Felix Kumar",
       "email": "felix.kumar@example.com",
       "gender": "Male",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:31:00.000Z"
     },
     {
       "id": "u33",
       "name": "Grace O'Connor",
       "email": "grace.oconnor@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:32:00.000Z"
     },
     {
       "id": "u34",
       "name": "Hassan Al-Rahman",
       "email": "hassan.alrahman@example.com",
       "gender": "Male",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:33:00.000Z"
     },
     {
       "id": "u35",
       "name": "Isabella Costa",
       "email": "isabella.costa@example.com",
       "gender": "Female",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:34:00.000Z"
     },
     {
       "id": "u36",
       "name": "James Peterson",
       "email": "james.peterson@example.com",
       "gender": "Male",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:35:00.000Z"
     },
     {
       "id": "u37",
       "name": "Kara Johnson",
       "email": "kara.johnson@example.com",
       "gender": "Female",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:36:00.000Z"
     },
     {
       "id": "u38",
       "name": "Liam O'Brien",
       "email": "liam.obrien@example.com",
       "gender": "Male",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:37:00.000Z"
     },
     {
       "id": "u39",
       "name": "Maya Gupta",
       "email": "maya.gupta@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:38:00.000Z"
     },
     {
       "id": "u40",
       "name": "Nathan Foster",
       "email": "nathan.foster@example.com",
       "gender": "Male",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:39:00.000Z"
     },
     {
       "id": "u41",
       "name": "Olivia Zhang",
       "email": "olivia.zhang@example.com",
       "gender": "Female",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:40:00.000Z"
     },
     {
       "id": "u42",
       "name": "Pablo Mendez",
       "email": "pablo.mendez@example.com",
       "gender": "Male",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:41:00.000Z"
     },
     {
       "id": "u43",
       "name": "Quinn Parker",
       "email": "quinn.parker@example.com",
       "gender": "Other",
-      "category": "Student"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:42:00.000Z"
     },
     {
       "id": "u44",
       "name": "Rosa Fernandez",
       "email": "rosa.fernandez@example.com",
       "gender": "Female",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:43:00.000Z"
     },
     {
       "id": "u45",
       "name": "Sebastian Mueller",
       "email": "sebastian.mueller@example.com",
       "gender": "Male",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:44:00.000Z"
     },
     {
       "id": "u46",
       "name": "Tanya Volkov",
       "email": "tanya.volkov@example.com",
       "gender": "Female",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:45:00.000Z"
     },
     {
       "id": "u47",
       "name": "Ulrich Schmidt",
       "email": "ulrich.schmidt@example.com",
       "gender": "Male",
-      "category": "Other"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:46:00.000Z"
     },
     {
       "id": "u48",
       "name": "Valentina Rossi",
       "email": "valentina.rossi@example.com",
       "gender": "Female",
-      "category": "Employee"
+      "category": "Employee",
+      "createdAt": "2025-08-01T12:47:00.000Z"
     },
     {
       "id": "u49",
       "name": "Wei Lin",
       "email": "wei.lin@example.com",
       "gender": "Male",
-      "category": "Student"
+      "category": "Student",
+      "createdAt": "2025-08-01T12:48:00.000Z"
     },
     {
       "id": "u50",
       "name": "Ximena Vargas",
       "email": "ximena.vargas@example.com",
       "gender": "Female",
-      "category": "Other"
+      "category": "Other",
+      "createdAt": "2025-08-01T12:49:00.000Z"
+    },
+    {
+      "id": "1d6a",
+      "name": "saikrishna chippa",
+      "email": "saikrishnachippa@gmail.com",
+      "gender": "Male",
+      "category": "Employee",
+      "createdAt": "2025-08-14T06:17:47.717Z"
+    },
+    {
+      "id": "447d",
+      "name": "saikrishna chippa",
+      "email": "saikrishnachippa4@gmail.com",
+      "gender": "Male",
+      "category": "Student",
+      "createdAt": "2025-08-14T06:18:07.025Z"
     }
   ],
   "products": [
     {
       "id": "p1",
       "name": "Smartphone",
-      "price": 700,
+      "price": 701,
       "description": "Latest model smartphone",
       "category": "Electronics",
-      "quantity": 45,
+      "quantity": 47,
       "sales": [
         {
           "userId": "u1",
@@ -408,19 +459,14 @@
           "quantity": 3,
           "date": "2025-08-11",
           "id": "u27-2025-08-11-1754920001002"
-        },
-        {
-          "userId": "u33",
-          "quantity": 1,
-          "date": "2025-08-10",
-          "id": "u33-2025-08-10-1754920001003"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:00:00.000Z"
     },
     {
       "id": "p2",
       "name": "T-Shirt",
-      "price": 19.99,
+      "price": 19,
       "description": "Comfortable cotton t-shirt",
       "category": "Clothing",
       "quantity": 85,
@@ -454,8 +500,15 @@
           "quantity": 4,
           "date": "2025-08-10",
           "id": "u28-2025-08-10-1754920001006"
+        },
+        {
+          "userId": "u3",
+          "quantity": 1,
+          "date": "2025-08-13",
+          "id": "u3-2025-08-13-1755076545267"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:01:00.000Z"
     },
     {
       "id": "e14e",
@@ -495,7 +548,8 @@
           "date": "2025-08-09",
           "id": "u39-2025-08-09-1754920001009"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:02:00.000Z"
     },
     {
       "id": "p4",
@@ -529,7 +583,8 @@
           "date": "2025-08-10",
           "id": "u35-2025-08-10-1754920001012"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:03:00.000Z"
     },
     {
       "id": "p5",
@@ -563,14 +618,15 @@
           "date": "2025-08-09",
           "id": "u40-2025-08-09-1754920001015"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:04:00.000Z"
     },
     {
       "id": "p6",
       "name": "Backpack",
       "price": 35,
       "description": "Waterproof travel backpack",
-      "category": "Accessories",
+      "category": "Electronics",
       "quantity": 90,
       "sales": [
         {
@@ -597,7 +653,8 @@
           "date": "2025-08-10",
           "id": "u43-2025-08-10-1754920001018"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:05:00.000Z"
     },
     {
       "id": "p7",
@@ -625,15 +682,16 @@
           "date": "2025-08-09",
           "id": "u36-2025-08-09-1754920001020"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:06:00.000Z"
     },
     {
       "id": "p8",
       "name": "Office Chair",
       "price": 250,
       "description": "Ergonomic office chair",
-      "category": "Furniture",
-      "quantity": 18,
+      "category": "Home & Garden",
+      "quantity": 19,
       "sales": [
         {
           "userId": "u10",
@@ -653,14 +711,15 @@
           "date": "2025-08-08",
           "id": "u42-2025-08-08-1754920001022"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:07:00.000Z"
     },
     {
       "id": "p9",
       "name": "Running Shoes",
       "price": 89.99,
       "description": "Lightweight running shoes",
-      "category": "Footwear",
+      "category": "Other",
       "quantity": 50,
       "sales": [
         {
@@ -687,12 +746,13 @@
           "date": "2025-08-09",
           "id": "u46-2025-08-09-1754920001025"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:08:00.000Z"
     },
     {
       "id": "p10",
       "name": "Smartwatch",
-      "price": 199.99,
+      "price": 199,
       "description": "Fitness tracking smartwatch",
       "category": "Electronics",
       "quantity": 32,
@@ -721,7 +781,8 @@
           "date": "2025-08-08",
           "id": "u41-2025-08-08-1754920001028"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:09:00.000Z"
     },
     {
       "id": "p11",
@@ -749,7 +810,8 @@
           "date": "2025-08-09",
           "id": "u49-2025-08-09-1754920001031"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:10:00.000Z"
     },
     {
       "id": "p12",
@@ -777,14 +839,15 @@
           "date": "2025-08-11",
           "id": "u50-2025-08-11-1754920001034"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:11:00.000Z"
     },
     {
       "id": "p13",
       "name": "Desk Lamp",
       "price": 45,
       "description": "LED desk lamp with adjustable brightness",
-      "category": "Home & Office",
+      "category": "Home & Garden",
       "quantity": 60,
       "sales": [
         {
@@ -799,7 +862,8 @@
           "date": "2025-08-09",
           "id": "u47-2025-08-09-1754920001036"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:12:00.000Z"
     },
     {
       "id": "p14",
@@ -827,7 +891,8 @@
           "date": "2025-08-10",
           "id": "u23-2025-08-10-1754920001039"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:13:00.000Z"
     },
     {
       "id": "p15",
@@ -849,7 +914,8 @@
           "date": "2025-08-11",
           "id": "u41-2025-08-11-1754920001041"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:14:00.000Z"
     },
     {
       "id": "p16",
@@ -877,7 +943,8 @@
           "date": "2025-08-09",
           "id": "u29-2025-08-09-1754920001044"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:15:00.000Z"
     },
     {
       "id": "p17",
@@ -899,7 +966,8 @@
           "date": "2025-08-10",
           "id": "u43-2025-08-10-1754920001046"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:16:00.000Z"
     },
     {
       "id": "p18",
@@ -921,7 +989,8 @@
           "date": "2025-08-10",
           "id": "u27-2025-08-10-1754920001048"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:17:00.000Z"
     },
     {
       "id": "p19",
@@ -943,7 +1012,8 @@
           "date": "2025-08-08",
           "id": "u39-2025-08-08-1754920001050"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:18:00.000Z"
     },
     {
       "id": "p20",
@@ -971,7 +1041,8 @@
           "date": "2025-08-09",
           "id": "u14-2025-08-09-1754920001053"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:19:00.000Z"
     },
     {
       "id": "p21",
@@ -999,7 +1070,8 @@
           "date": "2025-08-10",
           "id": "u42-2025-08-10-1754920001056"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:20:00.000Z"
     },
     {
       "id": "p22",
@@ -1021,7 +1093,8 @@
           "date": "2025-08-09",
           "id": "u36-2025-08-09-1754920001058"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:21:00.000Z"
     },
     {
       "id": "p23",
@@ -1049,7 +1122,8 @@
           "date": "2025-08-09",
           "id": "u45-2025-08-09-1754920001061"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:22:00.000Z"
     },
     {
       "id": "p24",
@@ -1083,7 +1157,8 @@
           "date": "2025-08-09",
           "id": "u50-2025-08-09-1754920001065"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:23:00.000Z"
     },
     {
       "id": "p25",
@@ -1105,7 +1180,8 @@
           "date": "2025-08-08",
           "id": "u40-2025-08-08-1754920001067"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:24:00.000Z"
     },
     {
       "id": "8e08",
@@ -1121,7 +1197,88 @@
           "date": "2025-08-12",
           "id": "e19b-2025-08-12-1754991082375"
         }
-      ]
+      ],
+      "createdAt": "2025-08-02T12:25:00.000Z"
+    },
+    {
+      "id": "c7f3",
+      "name": "iphone 16 pro max",
+      "price": 100,
+      "description": "iphone with 16 pro features",
+      "category": "Electronics",
+      "quantity": 10,
+      "sales": [
+        {
+          "userId": "8d8c",
+          "quantity": 5,
+          "date": "2025-08-13",
+          "id": "8d8c-2025-08-13-1755077846555"
+        }
+      ],
+      "createdAt": "2025-08-02T12:26:00.000Z"
+    },
+    {
+      "id": "19fc",
+      "name": "test-product",
+      "price": 10,
+      "description": "test product for testing",
+      "category": "Other",
+      "quantity": 10,
+      "sales": [
+        {
+          "userId": "0dba",
+          "quantity": 5,
+          "date": "2025-08-13",
+          "id": "0dba-2025-08-13-1755078319066"
+        },
+        {
+          "userId": "u7",
+          "quantity": 2,
+          "date": "2025-08-13",
+          "id": "u7-2025-08-13-1755078353341"
+        }
+      ],
+      "createdAt": "2025-08-02T12:27:00.000Z"
+    },
+    {
+      "id": "88d0",
+      "name": "phone",
+      "price": 20,
+      "description": "nice phone with bext features",
+      "category": "Electronics",
+      "quantity": 5,
+      "sales": [
+        {
+          "userId": "u1",
+          "quantity": 1,
+          "date": "2025-08-14",
+          "id": "u1-2025-08-14-1755152138731"
+        }
+      ],
+      "createdAt": "2025-08-14T05:46:49.222Z"
+    },
+    {
+      "id": "5777",
+      "name": "Smartwatch",
+      "price": 2,
+      "description": "nice watch with features with call features",
+      "category": "Electronics",
+      "quantity": 2,
+      "sales": [
+        {
+          "userId": "e19b",
+          "quantity": 1,
+          "date": "2025-08-14",
+          "id": "e19b-2025-08-14-1755152066343"
+        },
+        {
+          "userId": "u2",
+          "quantity": 1,
+          "date": "2025-08-14",
+          "id": "u2-2025-08-14-1755152242370"
+        }
+      ],
+      "createdAt": "2025-08-14T06:13:10.504Z"
     }
   ]
 }

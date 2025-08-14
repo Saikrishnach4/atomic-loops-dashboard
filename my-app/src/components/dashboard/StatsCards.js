@@ -1,4 +1,5 @@
 import React from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -11,8 +12,9 @@ import ManIcon from '@mui/icons-material/Man';
 import WomanIcon from '@mui/icons-material/Woman';
 
 export default function StatsCards({ totalUsers, totalProducts, maleUsers, femaleUsers }) {
+  const isSmallScreen = useMediaQuery('(max-width:650px)');
   return (
-    <Grid container spacing={2} sx={{ mb: 2 }}>
+    <Grid container spacing={2} direction={isSmallScreen ? 'column' : 'row'} sx={{ mb: 2 }}>
       <Grid item xs={12} sm={6} md={3}>
         <Card variant="outlined" sx={{ borderRadius: 2, background: 'linear-gradient(180deg, rgba(25,118,210,0.06), rgba(25,118,210,0))' }}>
           <CardContent sx={{ py: 2.5 }}>

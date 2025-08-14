@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
+import { useHookstate } from '@hookstate/core';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,11 +17,12 @@ import UserManager from './components/UserManager';
 import ProductManager from './components/ProductManager';
 
 export default function App() {
-  const [mode, setMode] = useState('light');
-  const theme = useMemo(() => createTheme({ palette: { mode } }), [mode]);
-  const toggleMode = () => setMode((m) => (m === 'light' ? 'dark' : 'light'));
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const toggleDrawer = () => setMobileOpen((o) => !o);
+  const mode = useHookstate('light');
+  const theme = useMemo(() => createTheme({ palette: { mode: mode.get() } }), [mode.get()]);
+  const toggleMode = () => mode.set((m) => (m === 'light' ? 'dark' : 'light'));
+  const mobileOpen = useHookstate(false);
+  const toggleDrawer = () => mobileOpen.set((o) => !o);
+  
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
@@ -33,16 +35,16 @@ export default function App() {
             </IconButton>
             <div style={{ display: 'flex', alignItems: 'center' }}>
             <IconButton onClick={toggleMode} color="inherit" aria-label="toggle theme">
-              {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
+              {mode.get() === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
             </IconButton>
               
-            <Typography variant="body2" sx={{ ml: 1 }}>{mode === 'light' ? 'Light' : 'Dark'} mode</Typography>
+            <Typography variant="body2" sx={{ ml: 1 }}>{mode.get() === 'light' ? 'Light' : 'Dark'} mode</Typography>
             </div>
             
           </Toolbar>
         </AppBar>
         <Box sx={{ display: 'flex', height: '100vh' }}>
-          <Sidebar mobileOpen={mobileOpen} onClose={toggleDrawer} />
+          <Sidebar mobileOpen={mobileOpen.get()} onClose={toggleDrawer} />
           <Box component="main" sx={{ flexGrow: 1, p: 3, bgcolor: (t) => (t.palette.mode === 'dark' ? 'background.default' : '#fafafa') }}>
             <Toolbar />
             <Routes>

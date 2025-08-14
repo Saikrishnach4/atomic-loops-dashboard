@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHookstate } from '@hookstate/core';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -28,22 +28,22 @@ import Paper from '@mui/material/Paper';
 export default function UserManager() {
 
     const users = useHookstate([]);
-    const [open, setOpen] = useState(false);
-    const [editingId, setEditingId] = useState(null);
-    const [form, setForm] = useState({ name: '', email: '', gender: '', category: '' });
-    const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false);
-    const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+    const open = useHookstate(false);
+    const editingId = useHookstate(null);
+    const form = useHookstate({ name: '', email: '', gender: '', category: '' });
+    const errors = useHookstate({});
+    const loading = useHookstate(false);
+    const snackbar = useHookstate({ open: false, message: '', severity: 'success' });
 
     const handleSnackbarClose = (_, reason) => {
         if (reason === 'clickaway') return;
-        setSnackbar((prev) => ({ ...prev, open: false }));
+        snackbar.set({ ...snackbar.get(), open: false });
     };
 
 
     const refreshUsers = async () => {
         try {
-            setLoading(true);
+            loading.set(true);
             const result = await atomicFetch(`${API_BASE}/users`);
 
             if (!result.success) {
@@ -52,13 +52,21 @@ export default function UserManager() {
 
             const list = Array.isArray(result.data) ? result.data : [];
             const unique = Array.from(new Map(list.map((u) => [u.id, u])).values());
-            users.set(unique);
+            const sorted = [...unique].sort((a, b) => {
+                const aTime = a && a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                const bTime = b && b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                if (aTime !== bTime) return bTime - aTime;
+                const aId = String(a?.id ?? '');
+                const bId = String(b?.id ?? '');
+                return bId.localeCompare(aId);
+            });
+            users.set(sorted);
         } catch (e) {
             console.error('Failed to load users:', e.message);
-            setSnackbar({ open: true, message: `Failed to load users: ${e.message}. Please check if the server is running.`, severity: 'error' });
+            snackbar.set({ open: true, message: `Failed to load users: ${e.message}. Please check if the server is running.`, severity: 'error' });
             users.set([]);
         } finally {
-            setLoading(false);
+            loading.set(false);
         }
     };
 
@@ -68,11 +76,12 @@ export default function UserManager() {
     }, []);
 
     const handleOpen = (id = null) => {
-        setEditingId(id);
+        editingId.set(id);
         if (id !== null) {
-            const existing = users.get().find((u) => u && u.id === id);
+            const list = users.get({ noproxy: true });
+            const existing = Array.isArray(list) ? list.find((u) => u && u.id === id) : null;
             if (existing) {
-                setForm({
+                form.set({
                     name: existing.name || '',
                     email: existing.email || '',
                     gender: existing.gender || '',
@@ -80,56 +89,70 @@ export default function UserManager() {
                 });
             }
         } else {
-            setForm({ name: '', email: '', gender: '', category: '' });
+            form.set({ name: '', email: '', gender: '', category: '' });
         }
-        setErrors({});
-        setOpen(true);
+        errors.set({});
+        open.set(true);
     };
 
     const handleClose = () => {
-        setOpen(false);
-        setForm({ name: '', email: '', gender: '', category: '' });
-        setEditingId(null);
-        setErrors({});
+        open.set(false);
+        form.set({ name: '', email: '', gender: '', category: '' });
+        editingId.set(null);
+        errors.set({});
     };
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const current = form.get({ noproxy: true });
+        form.set({ ...current, [e.target.name]: e.target.value });
     };
 
     const validate = () => {
         const newErrors = {};
 
 
-        if (!form.name.trim()) {
+        if (!form.get().name.trim()) {
             newErrors.name = 'Name is required';
-        } else if (form.name.trim().length < 2) {
+        } else if (form.get().name.trim().length < 2) {
             newErrors.name = 'Name must be at least 2 characters';
-        } else if (form.name.trim().length > 50) {
+        } else if (form.get().name.trim().length > 50) {
             newErrors.name = 'Name must be less than 50 characters';
-        }
-
-
-        if (!form.email.trim()) {
-            newErrors.email = 'Email is required';
         } else {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(form.email.trim())) {
-                newErrors.email = 'Please enter a valid email address';
+            // Validate name contains only letters, spaces, hyphens, and apostrophes
+            const nameRegex = /^[a-zA-Z\s\-']+$/;
+            if (!nameRegex.test(form.get().name.trim())) {
+                newErrors.name = 'Name can only contain letters, spaces, hyphens, and apostrophes';
             }
         }
 
 
-        if (!form.gender) {
+        if (!form.get().email.trim()) {
+            newErrors.email = 'Email is required';
+        } else {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(form.get().email.trim())) {
+                newErrors.email = 'Please enter a valid email address';
+            } else if (editingId.get() === null) {
+                // Only enforce uniqueness on create
+                const list = users.get({ noproxy: true }) || [];
+                const exists = Array.isArray(list) && list.some(u =>
+                    u && typeof u.email === 'string' && u.email.toLowerCase() === form.get().email.trim().toLowerCase()
+                );
+                if (exists) newErrors.email = 'User with this email already exists';
+            }
+        }
+
+
+        if (!form.get().gender) {
             newErrors.gender = 'Gender is required';
         }
 
 
-        if (!form.category) {
+        if (!form.get().category) {
             newErrors.category = 'Category is required';
         }
 
-        setErrors(newErrors);
+        errors.set(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
@@ -137,10 +160,10 @@ export default function UserManager() {
     const handleSave = async () => {
         if (!validate()) return;
         try {
-            if (editingId !== null) {
+            if (editingId.get() !== null) {
 
-                const payload = { ...form };
-                const checkResult = await atomicFetch(`${API_BASE}/users?id=${editingId}`);
+                const payload = { ...form.get() };
+                const checkResult = await atomicFetch(`${API_BASE}/users?id=${editingId.get()}`);
 
                 if (!checkResult.success) {
                     throw new Error(`Lookup failed: ${checkResult.status}`);
@@ -160,7 +183,7 @@ export default function UserManager() {
                 } else {
                     const createResult = await atomicFetch(`${API_BASE}/users`, {
                         method: 'POST',
-                        body: payload
+                        body: { ...payload, createdAt: new Date().toISOString() }
                     });
 
                     if (!createResult.success) {
@@ -172,7 +195,7 @@ export default function UserManager() {
 
                 const result = await atomicFetch(`${API_BASE}/users`, {
                     method: 'POST',
-                    body: form
+                    body: { ...form.get(), createdAt: new Date().toISOString() }
                 });
 
                 if (!result.success) {
@@ -181,11 +204,11 @@ export default function UserManager() {
 
                 await refreshUsers();
             }
-            setSnackbar({ open: true, message: 'User saved successfully.', severity: 'success' });
+            snackbar.set({ open: true, message: 'User saved successfully.', severity: 'success' });
             handleClose();
         } catch (e) {
             console.error('Failed to save user:', e.message);
-            setSnackbar({ open: true, message: `Failed to save user: ${e.message}. Please try again.`, severity: 'error' });
+            snackbar.set({ open: true, message: `Failed to save user: ${e.message}. Please try again.`, severity: 'error' });
         }
     };
 
@@ -210,10 +233,10 @@ export default function UserManager() {
                 }
             }
             await refreshUsers();
-            setSnackbar({ open: true, message: 'User deleted successfully.', severity: 'success' });
+            snackbar.set({ open: true, message: 'User deleted successfully.', severity: 'success' });
         } catch (e) {
             console.error('Failed to delete user:', e.message);
-            setSnackbar({ open: true, message: `Failed to delete user: ${e.message}. Please try again.`, severity: 'error' });
+            snackbar.set({ open: true, message: `Failed to delete user: ${e.message}. Please try again.`, severity: 'error' });
         }
     };
 
@@ -249,21 +272,21 @@ export default function UserManager() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {loading && (
+                        {loading.get() && (
                             <TableRow>
                                 <TableCell colSpan={5} style={{ textAlign: 'center' }}>
                                     Loading users...
                                 </TableCell>
                             </TableRow>
                         )}
-                        {!loading && users.get().length === 0 && (
+                        {!loading.get() && users.get().length === 0 && (
                             <TableRow>
                                 <TableCell colSpan={5} style={{ textAlign: 'center' }}>
                                     No users found. Add your first user!
                                 </TableCell>
                             </TableRow>
                         )}
-                        {!loading && users.get().map((user) => (
+                        {!loading.get() && users.get().map((user) => (
                             <TableRow key={user.id}>
                                 <TableCell>{user.name}</TableCell>
                                 <TableCell>{user.email}</TableCell>
@@ -291,41 +314,41 @@ export default function UserManager() {
                 </Table>
             </TableContainer>
 
-            <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+            <Dialog open={open.get()} onClose={handleClose} maxWidth="sm" fullWidth>
                 <DialogTitle>
-                    {editingId !== null ? 'Edit User' : 'Add New User'}
+                    {editingId.get() !== null ? 'Edit User' : 'Add New User'}
                 </DialogTitle>
                 <DialogContent>
                     <TextField
                         margin="dense"
                         label="Name"
                         name="name"
-                        value={form.name}
+                        value={form.get().name}
                         onChange={handleChange}
                         fullWidth
                         required
-                        error={!!errors.name}
-                        helperText={errors.name}
+                        error={!!errors.get().name}
+                        helperText={errors.get().name}
                         style={{ marginBottom: '10px' }}
                     />
                     <TextField
                         margin="dense"
                         label="Email"
                         name="email"
-                        value={form.email}
+                        value={form.get().email}
                         onChange={handleChange}
                         fullWidth
                         required
-                        error={!!errors.email}
-                        helperText={errors.email}
+                        error={!!errors.get().email}
+                        helperText={errors.get().email}
                         style={{ marginBottom: '10px' }}
                     />
-                    <FormControl fullWidth margin="dense" required error={!!errors.gender} style={{ marginBottom: '10px' }}>
+                    <FormControl fullWidth margin="dense" required error={!!errors.get().gender} style={{ marginBottom: '10px' }}>
                         <InputLabel id="gender-label">Gender</InputLabel>
                         <Select
                             labelId="gender-label"
                             name="gender"
-                            value={form.gender}
+                            value={form.get().gender}
                             label="Gender"
                             onChange={handleChange}
                         >
@@ -333,14 +356,14 @@ export default function UserManager() {
                             <MenuItem value="Female">Female</MenuItem>
                             <MenuItem value="Other">Other</MenuItem>
                         </Select>
-                        {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}
+                        {errors.get().gender && <FormHelperText>{errors.get().gender}</FormHelperText>}
                     </FormControl>
-                    <FormControl fullWidth margin="dense" required error={!!errors.category}>
+                    <FormControl fullWidth margin="dense" required error={!!errors.get().category}>
                         <InputLabel id="category-label">Category</InputLabel>
                         <Select
                             labelId="category-label"
                             name="category"
-                            value={form.category}
+                            value={form.get().category}
                             label="Category"
                             onChange={handleChange}
                         >
@@ -348,7 +371,7 @@ export default function UserManager() {
                             <MenuItem value="Employee">Employee</MenuItem>
                             <MenuItem value="Other">Other</MenuItem>
                         </Select>
-                        {errors.category && <FormHelperText>{errors.category}</FormHelperText>}
+                        {errors.get().category && <FormHelperText>{errors.get().category}</FormHelperText>}
                     </FormControl>
                 </DialogContent>
                 <DialogActions>
@@ -360,18 +383,18 @@ export default function UserManager() {
                         variant="contained"
                         color="primary"
                     >
-                        {editingId !== null ? 'Update' : 'Save'}
+                        {editingId.get() !== null ? 'Update' : 'Save'}
                     </Button>
                 </DialogActions>
             </Dialog>
             <Snackbar
-                open={snackbar.open}
+                open={snackbar.get().open}
                 autoHideDuration={3000}
                 onClose={handleSnackbarClose}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
             >
-                <Alert onClose={handleSnackbarClose} severity={snackbar.severity} sx={{ width: '100%' }}>
-                    {snackbar.message}
+                <Alert onClose={handleSnackbarClose} severity={snackbar.get().severity} sx={{ width: '100%' }}>
+                    {snackbar.get().message}
                 </Alert>
             </Snackbar>
         </div>
